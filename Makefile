@@ -3,7 +3,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 OBJ_DIR		= obj
 
-SRCS		= 
+SRCS		= parsing/
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 GREEN		= \033[0;32m
