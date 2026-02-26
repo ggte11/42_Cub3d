@@ -26,7 +26,7 @@ BLUE        = \033[0;34m
 CYAN        = \033[0;36m
 RESET       = \033[0m
 
-all: $(MLX) $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME)
 
 $(MLX):
 	@echo "$(CYAN)🔨 Building minilibx...$(RESET)"
