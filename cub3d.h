@@ -15,14 +15,22 @@
 # include "libft/libft.h"
 
 /* ************************************************************************** */
+/*                                   DEFINES                                  */
+/* ************************************************************************** */
+
+# define SWIDTH 1920		// Screen width
+# define SHEIGHT 1080		// Screen height
+
+
+/* ************************************************************************** */
 /*                                   STRUCTS                                  */
 /* ************************************************************************** */
 
 typedef struct s_map
 {
 	char	**grid;
-	int		width;
-	int		height;
+	int		m_width;
+	int		m_height;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
@@ -39,10 +47,16 @@ typedef struct s_config
 }			t_config;
 
 // Image struct
-typedef struct s_img
+typedef struct s_image
 {
-	void	*image;
-}			t_img;
+	void	*img;
+	int		size_line;
+	char	*data;
+	int		bpp;
+	int		endian;
+	int		width;
+	int		height;
+}			t_image;
 
 // Main struct
 typedef struct s_game
@@ -51,11 +65,16 @@ typedef struct s_game
 	void		*win;
 	t_map		map;
 	t_config	config;
-}		t_game;
+	t_image		image;
+}				t_game;
 
 /* ************************************************************************** */
 /*                                 FUNCTIONS                                  */
 /* ************************************************************************** */
+
+// initializer
+void	init_game(t_game *game);
+
 
 // Parsing
 int		print_error(char *msg);

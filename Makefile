@@ -2,8 +2,20 @@ NAME		= cub3d
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 OBJ_DIR		= obj
+MLX_DIR		= minilibx-linux
+LIBFT_DIR	= libft
+MLX			= $(MLX_DIR)/libmlx.a
+LIBFT		= $(LIBFT_DIR)/libft.a
+INCLUDES	= -I$(MLX_DIR) -I$(LIBFT_DIR)
+LIBS		= -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
 
-SRCS		= parsing/
+SRCS		= cub3d.c \
+			  initializer.c \
+			  parsing/file_validation.c \
+			  parsing/parse_file.c \
+			  parsing/parse_utils.c \
+			  parsing/validate_map.c
+
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 GREEN		= \033[0;32m
@@ -13,18 +25,27 @@ BLUE		= \033[0;34m
 CYAN		= \033[0;36m
 RESET		= \033[0m
 
-all: $(NAME)
+all: $(MLX) $(LIBFT) $(NAME)
+
+$(MLX):
+	@echo "$(CYAN)🔨 Building minilibx...$(RESET)"
+	@$(MAKE) -C $(MLX_DIR)
+
+$(LIBFT):
+	@echo "$(CYAN)🔨 Building libft...$(RESET)"
+	@$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/parsing
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "$(CYAN)🔨 Compiling $(YELLOW)$<$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@echo "$(BLUE)🔗 Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME) created successfully!$(RESET)"
 
 clean:
@@ -33,6 +54,8 @@ clean:
 		rm -rf $(OBJ_DIR); \
 		echo "$(GREEN)✨ Object files cleaned!$(RESET)"; \
 	fi
+	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@if [ -f $(NAME) ]; then \
@@ -40,6 +63,7 @@ fclean: clean
 		rm -f $(NAME); \
 		echo "$(GREEN)✨ $(NAME) removed!$(RESET)"; \
 	fi
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
