@@ -13,10 +13,21 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
+# include "libft/get_next_line/get_next_line.h"
 
 /* ************************************************************************** */
 /*                                   STRUCTS                                  */
 /* ************************************************************************** */
+
+typedef enum e_token
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C,
+}	t_token;
 
 typedef struct s_map
 {
@@ -38,17 +49,13 @@ typedef struct s_config
 	int		ceiling_color;
 }			t_config;
 
-// Image struct
-typedef struct s_img
-{
-	void	*image;
-}			t_img;
 
 // Main struct
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			fd;
 	t_map		map;
 	t_config	config;
 }		t_game;
@@ -59,7 +66,7 @@ typedef struct s_game
 
 // Parsing
 int		print_error(char *msg);
-int		parse_file(char *filename);
+int		parse_file(t_game *game, char *filename);
 
 
 #endif

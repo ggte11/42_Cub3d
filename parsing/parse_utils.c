@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	print_error(char *msg)
 {
@@ -7,3 +7,4 @@ int	print_error(char *msg)
 	ft_putstr_fd("\n", 2);
 	return (1);
 }
+

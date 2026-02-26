@@ -22,15 +22,12 @@ static int	open_file(char *filename)
 	return (fd);
 }
 
-int	parse_file(char *filename)
+int	parse_file(t_game *game, char *filename)
 {
-	int	fd;
-
 	if (!check_ext(filename))
-		return (print_error("Invalid file extension, must be .cub"));
-	fd = open_file(filename);
-	if (fd < 0)
+		return (print_error("Invalid file name, must be *.cub"));
+	game->fd = open_file(filename);
+	if (game->fd < 0)
 		return (print_error("Cannot open file"));
-	close(fd);
 	return (0);
 }
