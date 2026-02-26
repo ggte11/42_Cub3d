@@ -59,6 +59,7 @@ typedef struct s_game
 
 // Parsing
 int		print_error(char *msg);
+int		parse_file(char *filename);
 
 
 #endif
