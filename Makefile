@@ -8,8 +8,9 @@ GNL_DIR		= $(LIBFT_DIR)/get_next_line
 MLX         = $(MLX_DIR)/libmlx.a
 LIBFT       = $(LIBFT_DIR)/libft.a
 GNL			= $(GNL_DIR)/get_next_line.a
-INCLUDES    = -I$(MLX_DIR) -I$(LIBFT_DIR)
-LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
+INCLUDES    = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(GNL_DIR)
+#LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
+LIBS        = -L$(MLX_DIR) -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
 
 SRCS        = cub3d.c \
               parsing/file_validation.c \
@@ -26,7 +27,7 @@ BLUE        = \033[0;34m
 CYAN        = \033[0;36m
 RESET       = \033[0m
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(GNL) $(NAME)
 
 $(MLX):
 	@echo "$(CYAN)🔨 Building minilibx...$(RESET)"
@@ -46,7 +47,7 @@ $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 
 $(NAME): $(OBJS)
 	@echo "$(BLUE)🔗 Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(GNL) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)✅ $(NAME) created successfully!$(RESET)"
 
 clean:

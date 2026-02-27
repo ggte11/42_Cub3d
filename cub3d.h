@@ -27,6 +27,7 @@ typedef enum e_token
 	EA,
 	F,
 	C,
+	ERROR,
 }	t_token;
 
 typedef struct s_map
@@ -67,6 +68,6 @@ typedef struct s_game
 // Parsing
 int		print_error(char *msg);
 int		parse_file(t_game *game, char *filename);
-
+int 	extract_data(t_game *game);
 
 #endif
