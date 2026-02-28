@@ -51,6 +51,22 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 	return (free(text), 0);
 }
 
+static int parse_color_code(char *color, int *i)
+{
+	int value;
+
+	value = 0;
+	while (color[*i] && color[*i] != ',')
+	{
+		if (!ft_isdigit(color[*i]))
+			return (-1);
+		value = value * 10 + (color[*i] - '0');
+		(*i)++;
+	}
+	(*i)++;
+	return (value);
+}
+
 int save_color(t_game *game, char *color, t_token type)
 {
 	int i;
@@ -58,33 +74,12 @@ int save_color(t_game *game, char *color, t_token type)
 	int G;
 	int B;
 
-	R = 0;
-	G = 0;
-	B = 0;
 	i = skipwhitespace(color, 1);
-	while (color[i] && color[i] != ',')
-	{
-		if (!ft_isdigit(color[i]))
-			return (0);
-		R = R * 10 + (color[i] - '0');
-		i++;
-	}
-	i++;
-	while (color[i] && color[i] != ',')
-	{
-		if (!ft_isdigit(color[i]))
-			return (0);
-		G = G * 10 + (color[i] - '0');
-		i++;
-	}
-	i++;
-	while (color[i])
-	{
-		if (!ft_isdigit(color[i]))
-			return (0);
-		B = B * 10 + (color[i] - '0');
-		i++;
-	}
+	R = parse_color_code(color, &i);
+	G = parse_color_code(color, &i);
+	B = parse_color_code(color, &i);
+	if (R == -1 || G == -1 || B == -1)
+		return (0);
 	if (type == F)
 		return (game->config.floor_color = ((R << 16) | (G << 8) | B), 1);
 	if (type == C)
@@ -130,7 +125,8 @@ int extract_data(t_game *game)
 			line[line_len - 1] = 0;
 			if (!process_line(game, line))
 				return 1;
-			line[line_len - 1] = '\n';
 		}
+		else
+			free(line);
 	}
 }

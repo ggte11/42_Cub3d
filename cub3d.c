@@ -10,6 +10,14 @@ void init_config(t_game *game)
 	game->config.ceiling_color = -1;
 }
 
+void clean_config(t_game *game)
+{
+	free(game->config.no_text);
+	free(game->config.so_text);
+	free(game->config.ea_text);
+	free(game->config.we_text);
+}
+
 int	main(int ac, char **av)
 {
 	t_game game;
@@ -27,6 +35,7 @@ int	main(int ac, char **av)
 	puts(game.config.we_text);
 	printf("%X\n", game.config.floor_color);
 	printf("%X\n", game.config.ceiling_color);
+	clean_config(&game);
 	close(game.fd);
 	return 0;
 }
