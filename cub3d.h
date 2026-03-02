@@ -16,6 +16,16 @@
 # include "libft/get_next_line/get_next_line.h"
 
 /* ************************************************************************** */
+/*                                   DEFINES                                  */
+/* ************************************************************************** */
+
+# define FORM_ERR "Invalid file format"
+# define MISS_TEXT "Wall texture file doesn't exist or is inaccessible"
+# define DBL_TEXT "Double definition of wall texture"
+# define DBL_COLOR "Double definition of color"
+# define ALL_ERR "Allocation error"
+
+/* ************************************************************************** */
 /*                                   STRUCTS                                  */
 /* ************************************************************************** */
 

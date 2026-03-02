@@ -10,6 +10,24 @@ int skipwhitespace(char *str, int pos)
 	return i;
 }
 
+int	count_elems(char const *s)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (s[i] == ' ')
+		i++;
+	while (s[i] != '\0')
+	{
+		if (s[i] != ' ' && (i == 0 || s[i - 1] == ' '))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 t_token find_token_type(char *line)
 {
 	if (*line == 'F' && line[1] == ' ')
@@ -32,14 +50,16 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 	unsigned int i;
 	char *text;
 
+	if (count_elems(wall) != 2)
+		return (print_error(FORM_ERR), 0);
 	i = (unsigned)skipwhitespace(wall, 2);
 	if (!wall[i])
-		return (0);
+		return (print_error(FORM_ERR), 0);
 	text = ft_substr(wall, i, ft_strlen(wall + i) + 1);
 	if (!text)
-		return (0);
+		return (print_error(ALL_ERR), 0);
 	if (access(text, O_RDONLY))
-		return (free(text), 0);
+		return (print_error(MISS_TEXT), free(text), 0);
 	if (type == NO && !game->config.no_text)
 		return (game->config.no_text = text, 1);
 	if (type == SO && !game->config.so_text)
@@ -48,21 +68,26 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 		return (game->config.we_text = text, 1);
 	if (type == EA && !game->config.ea_text)
 		return (game->config.ea_text = text, 1);
-	return (free(text), 0);
+	return (print_error(DBL_TEXT), free(text), 0);
 }
 
 static int parse_color_code(char *color, int *i)
 {
 	int value;
+	int delta_i;
 
 	value = 0;
+	delta_i = 0;
 	while (color[*i] && color[*i] != ',')
 	{
 		if (!ft_isdigit(color[*i]))
 			return (-1);
 		value = value * 10 + (color[*i] - '0');
 		(*i)++;
+		delta_i++;
 	}
+	if (delta_i > 3 || value > 255)
+		return (-1);
 	(*i)++;
 	return (value);
 }
@@ -74,17 +99,19 @@ int save_color(t_game *game, char *color, t_token type)
 	int G;
 	int B;
 
+	if (count_elems(color) != 2)
+		return (print_error(FORM_ERR), 0);
 	i = skipwhitespace(color, 1);
 	R = parse_color_code(color, &i);
 	G = parse_color_code(color, &i);
 	B = parse_color_code(color, &i);
 	if (R == -1 || G == -1 || B == -1)
-		return (0);
+		return (print_error(FORM_ERR), 0);
 	if (type == F)
 		return (game->config.floor_color = ((R << 16) | (G << 8) | B), 1);
 	if (type == C)
 		return (game->config.ceiling_color = ((R << 16) | (G << 8) | B), 1);
-	return (0);
+	return (print_error(FORM_ERR), 0);
 }
 
 int process_line(t_game *game, char *line)
