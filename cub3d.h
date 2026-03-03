@@ -24,6 +24,8 @@
 # define DBL_TEXT "Double definition of wall texture"
 # define DBL_COLOR "Double definition of color"
 # define ALL_ERR "Allocation error"
+# define RGB_ERR "Invalid RGB range or format"
+# define TYP_ERR "Invalid identifier"
 
 /* ************************************************************************** */
 /*                                   STRUCTS                                  */

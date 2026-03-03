@@ -18,6 +18,23 @@ void clean_config(t_game *game)
 	free(game->config.we_text);
 }
 
+int validate_config(t_game *game)
+{
+	if (!game->config.no_text)
+		return (print_error(FORM_ERR), 0);
+	if (!game->config.so_text)
+		return (print_error(FORM_ERR), 0);
+	if (!game->config.ea_text)
+		return (print_error(FORM_ERR), 0);
+	if (!game->config.we_text)
+		return (print_error(FORM_ERR), 0);
+	if (game->config.floor_color == -1)
+		return (print_error(FORM_ERR), 0);
+	if (game->config.ceiling_color == -1)
+		return (print_error(FORM_ERR), 0);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_game game;
@@ -29,12 +46,12 @@ int	main(int ac, char **av)
 		return (1);
 	init_config(&game);
 	extract_data(&game);
-	puts(game.config.no_text);
-	puts(game.config.so_text);
-	puts(game.config.ea_text);
-	puts(game.config.we_text);
-	printf("%X\n", game.config.floor_color);
-	printf("%X\n", game.config.ceiling_color);
+	if (!validate_config(&game))
+	{
+		clean_config(&game);
+		close(game.fd);
+		return 1;
+	}
 	clean_config(&game);
 	close(game.fd);
 	return 0;

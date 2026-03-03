@@ -86,7 +86,7 @@ static int parse_color_code(char *color, int *i)
 		(*i)++;
 		delta_i++;
 	}
-	if (delta_i > 3 || value > 255)
+	if ((delta_i == 0 || delta_i > 3) || value > 255)
 		return (-1);
 	(*i)++;
 	return (value);
@@ -106,7 +106,7 @@ int save_color(t_game *game, char *color, t_token type)
 	G = parse_color_code(color, &i);
 	B = parse_color_code(color, &i);
 	if (R == -1 || G == -1 || B == -1)
-		return (print_error(FORM_ERR), 0);
+		return (print_error(RGB_ERR), 0);
 	if (type == F)
 		return (game->config.floor_color = ((R << 16) | (G << 8) | B), 1);
 	if (type == C)
@@ -124,7 +124,7 @@ int process_line(t_game *game, char *line)
 		return (free(line), 0);
 	type = find_token_type(line + i);
 	if (type == ERROR)
-		return (free(line), 0);
+		return (free(line), print_error(TYP_ERR), 0);
 	if (type >= 0 && type <= 3)
 		if (!save_wall_text(game, line + i, type))
 			return (free(line), 0);
@@ -149,7 +149,8 @@ int extract_data(t_game *game)
 		if (*line != '\n')
 		{
 			line_len = ft_strlen(line);
-			line[line_len - 1] = 0;
+			if (line[line_len - 1] == '\n')
+				line[line_len - 1] = 0;
 			if (!process_line(game, line))
 				return 1;
 		}
