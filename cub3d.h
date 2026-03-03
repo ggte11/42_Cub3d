@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
 # include <X11/X.h>
@@ -18,9 +19,19 @@
 /*                                   DEFINES                                  */
 /* ************************************************************************** */
 
-# define SWIDTH 1920		// Screen width
-# define SHEIGHT 1080		// Screen height
+# define SWIDTH 1280		// Screen width
+# define SHEIGHT 720		// Screen height
 
+# define W 119				// W key
+# define S 115				// S key
+# define A 97				// A key
+# define D 100				// D key
+
+# define ARROW_LEFT 65361
+# define ARROW_RIGHT 65363
+# define ESC 65307
+
+# define PI 3.14159265359
 
 /* ************************************************************************** */
 /*                                   STRUCTS                                  */
@@ -58,6 +69,25 @@ typedef struct s_image
 	int		height;
 }			t_image;
 
+typedef struct s_key
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	l_arrow;
+	bool	r_arrow;
+}			t_key;
+
+// Player struct
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	t_key	key;
+}			t_player;
+
 // Main struct
 typedef struct s_game
 {
@@ -66,6 +96,7 @@ typedef struct s_game
 	t_map		map;
 	t_config	config;
 	t_image		image;
+	t_player	player;
 }				t_game;
 
 /* ************************************************************************** */
@@ -74,7 +105,18 @@ typedef struct s_game
 
 // initializer
 void	init_game(t_game *game);
+void	put_pixel(int x, int y, int color, t_game *game);
+int		draw_loop(t_game *game);
+void	clear_image(t_game *game);
 
+// keys
+int		key_press(int keycode, t_player *player);
+int		key_realease(int keycode, t_player *player);
+
+// player
+void	init_player(t_player *player);
+void	move_player(t_player *player);
+void	draw_player(t_game *game);
 
 // Parsing
 int		print_error(char *msg);

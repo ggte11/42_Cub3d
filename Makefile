@@ -9,12 +9,10 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 INCLUDES	= -I$(MLX_DIR) -I$(LIBFT_DIR)
 LIBS		= -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
 
-SRCS		= cub3d.c \
-			  initializer.c \
-			  parsing/file_validation.c \
-			  parsing/parse_file.c \
-			  parsing/parse_utils.c \
-			  parsing/validate_map.c
+SRCS		= cub3d.c srcs/initializer.c srcs/player.c srcs/keys.c \
+			  parsing/file_validation.c parsing/parse_file.c \
+			  parsing/parse_utils.c parsing/validate_map.c \
+			  
 
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
@@ -38,6 +36,7 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/parsing
+	@mkdir -p $(OBJ_DIR)/srcs
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "$(CYAN)🔨 Compiling $(YELLOW)$<$(RESET)"
