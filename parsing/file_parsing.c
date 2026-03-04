@@ -34,6 +34,8 @@ t_token find_token_type(char *line)
 		return (F);
 	if (*line == 'C' && line[1] == ' ')
 		return (C);
+	if (*line == 1)
+		return (MAP);
 	if (!ft_strncmp(line, "NO", 2) && line[2] == ' ')
 		return (NO);
 	if (!ft_strncmp(line, "SO", 2) && line[2] == ' ')
@@ -107,11 +109,11 @@ int save_color(t_game *game, char *color, t_token type)
 	B = parse_color_code(color, &i);
 	if (R == -1 || G == -1 || B == -1)
 		return (print_error(RGB_ERR), 0);
-	if (type == F)
+	if (type == F && game->config.floor_color == -1)
 		return (game->config.floor_color = ((R << 16) | (G << 8) | B), 1);
-	if (type == C)
+	if (type == C && game->config.ceiling_color == -1)
 		return (game->config.ceiling_color = ((R << 16) | (G << 8) | B), 1);
-	return (print_error(FORM_ERR), 0);
+	return (print_error(DBL_COLOR), 0);
 }
 
 int process_line(t_game *game, char *line)
@@ -125,14 +127,19 @@ int process_line(t_game *game, char *line)
 	type = find_token_type(line + i);
 	if (type == ERROR)
 		return (free(line), print_error(TYP_ERR), 0);
-	if (type >= 0 && type <= 3)
+	if (type >= NO && type <= EA)
 		if (!save_wall_text(game, line + i, type))
 			return (free(line), 0);
-	if (type == 4 || type == 5)
+	if (type == F || type == C)
 		if (!save_color(game, line + i, type))
 			return (free(line), 0);
-	if (line[i] == '1')
-		return (free(line), 0);
+	if (type == MAP)
+	{
+		if (check_config(game))
+			return (free(line), 2);
+		else
+			return (free(line), 0);
+	}
 	return (free(line), 1);
 }
 
@@ -140,6 +147,7 @@ int extract_data(t_game *game)
 {
 	char *line;
 	size_t line_len;
+	int process_ret;
 
 	while (1)
 	{
@@ -151,7 +159,10 @@ int extract_data(t_game *game)
 			line_len = ft_strlen(line);
 			if (line[line_len - 1] == '\n')
 				line[line_len - 1] = 0;
-			if (!process_line(game, line))
+			process_ret = process_line(game, line);
+			if (process_ret == 2)
+				return (printf("MAP FOUND!\n"), 0);
+			else if (!process_ret)
 				return 1;
 		}
 		else

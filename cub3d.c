@@ -18,19 +18,26 @@ void clean_config(t_game *game)
 	free(game->config.we_text);
 }
 
-int validate_config(t_game *game)
+int check_config(t_game *game)
 {
 	if (!game->config.no_text)
-		return (print_error(FORM_ERR), 0);
+		return (0);
 	if (!game->config.so_text)
-		return (print_error(FORM_ERR), 0);
+		return (0);
 	if (!game->config.ea_text)
-		return (print_error(FORM_ERR), 0);
+		return (0);
 	if (!game->config.we_text)
-		return (print_error(FORM_ERR), 0);
+		return (0);
 	if (game->config.floor_color == -1)
-		return (print_error(FORM_ERR), 0);
+		return (0);
 	if (game->config.ceiling_color == -1)
+		return (0);
+	return (1);
+}
+
+int validate_config(t_game *game)
+{
+	if (!check_config(game))
 		return (print_error(FORM_ERR), 0);
 	return (1);
 }
