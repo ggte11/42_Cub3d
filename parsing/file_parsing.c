@@ -34,7 +34,7 @@ t_token find_token_type(char *line)
 		return (F);
 	if (*line == 'C' && line[1] == ' ')
 		return (C);
-	if (*line == 1)
+	if (*line == '1')
 		return (MAP);
 	if (!ft_strncmp(line, "NO", 2) && line[2] == ' ')
 		return (NO);
