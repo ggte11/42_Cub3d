@@ -10,7 +10,7 @@ int	main(int ac, char **av)
 	init_game(&game);
 	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L<<1, key_realease, &game.player);
-	draw_player(&game);
+	draw_square(game.player.x, game.player.y, 64, 0x00FF00, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
 }

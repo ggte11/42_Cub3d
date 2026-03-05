@@ -16,8 +16,22 @@ void	init_player(t_player *player)
 void	move_player(t_player *player)
 {
 	float	speed;
+	float	angle_speed;
+	float	cos_angle;
+	float	sin_angle;
 
-	speed = 1.5;
+	speed = 10;
+	angle_speed = 0.1;
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
+	if (player->key.l_arrow)
+		player->angle -= angle_speed;
+	if (player->key.r_arrow)
+		player->angle += angle_speed;
+	if (player->angle > 2 * PI)
+		player->angle = 0;
+	if (player->angle < 0)
+		player->angle = 2 * PI;
 	if (player->key.w)
 		player->y -= speed;
 	if (player->key.s)
@@ -28,24 +42,23 @@ void	move_player(t_player *player)
 		player->x += speed;
 }
 
-void	draw_player(t_game *game)
+void	draw_square(int x, int y, int size, int color ,t_game *game)
 {
 	int	i;
-	int	j;
-	int	x;
-	int	y;
 
-	x = game->player.x;
-	y = game->player.y;
-	i = -5;
-	while (i < 5)
-	{
-		j = -5;
-		while (j < 5)
-		{
-			put_pixel(x + i, y + j, 0x00FF00, game);
-			j++;
-		}
-		i++;
-	}
+	i = 0;
+	while (i++ < size)
+		put_pixel(x + i, y, color, game);
+	i = 0;
+	while (i++ < size)
+		put_pixel(x + i, y, color, game);
+	i = 0;
+	while (i++ < size)
+		put_pixel(x + i, y, color, game);
+	i = 0;
+	while (i++ < size)
+		put_pixel(x + i, y, color, game);
+	i = 0;
+	while (i++ < size)
+		put_pixel(x + i, y, color, game);
 }

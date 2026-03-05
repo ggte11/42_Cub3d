@@ -24,11 +24,53 @@ void	clear_image(t_game *game)
 	}
 }
 
+char	**get_map(void)
+{
+	char	**map = malloc(sizeof(char *) * 11);
+	map[0] = "11111111111111";
+	map[1] = "10000000000001";
+	map[2] = "10000000000001";
+	map[3] = "10000000000001";
+	map[4] = "10000000000001";
+	map[5] = "10000000000001";
+	map[6] = "10000000000001";
+	map[7] = "10000000000001";
+	map[8] = "10000000000001";
+	map[9] = "11111111111111";
+	map[10] = NULL;
+	return (map);
+}
+
+void	draw_map(t_game *game)
+{
+	char	**map;
+	int		color;
+	int		y;
+	int		x;
+
+	map = game->map.grid;
+	color = 0x0000FF;
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '1')
+				draw_square(x * 64, y * 64, 64, color, game);
+			x++;
+		}
+		y++;
+	}
+}
+
 int	draw_loop(t_game *game)
 {
 	move_player(&game->player);
 	clear_image(game);
-	draw_player(game);
+	//draw_minimap(game); //por acabar
+	draw_square(game->player.x, game->player.y, 10, 0x00FF00, game);
+	draw_map(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 	return (0);
 }
@@ -36,7 +78,7 @@ int	draw_loop(t_game *game)
 void	init_game(t_game *game)
 {
 	init_player(&game->player);
-	game->map.grid = get_map();
+	game->map.grid = get_map(); 
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3d");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);

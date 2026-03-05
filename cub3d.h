@@ -21,6 +21,11 @@
 
 # define SWIDTH 1280		// Screen width
 # define SHEIGHT 720		// Screen height
+# define BLOCK 64			// Block size of player
+# define TILE 24			// Tile size minimap (24x24)
+# define MINIMAP_SCALE 0.5
+# define MINIMAP_X 10
+# define MINIMAP_Y 10
 
 # define W 119				// W key
 # define S 115				// S key
@@ -108,6 +113,8 @@ void	init_game(t_game *game);
 void	put_pixel(int x, int y, int color, t_game *game);
 int		draw_loop(t_game *game);
 void	clear_image(t_game *game);
+void	draw_map(t_game *game);
+
 
 // keys
 int		key_press(int keycode, t_player *player);
@@ -116,11 +123,14 @@ int		key_realease(int keycode, t_player *player);
 // player
 void	init_player(t_player *player);
 void	move_player(t_player *player);
-void	draw_player(t_game *game);
+void	draw_square(int x, int y, int size, int color ,t_game *game);
 
 // Parsing
 int		print_error(char *msg);
 int		parse_file(char *filename);
 
+// Minimap
+void	draw_tile(t_game *game, int x, int y, int color);
+void	draw_minimap(t_game *game);
 
 #endif
