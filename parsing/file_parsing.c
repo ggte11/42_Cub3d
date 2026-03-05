@@ -121,6 +121,8 @@ int process_line(t_game *game, char *line)
 	int i;
 	t_token type;
 
+	if (*line == '\0')
+		return (free(line), 1);
 	i = skipwhitespace(line, 0);
 	if (!line[i])
 		return (free(line), 0);
@@ -136,14 +138,41 @@ int process_line(t_game *game, char *line)
 	if (type == MAP)
 	{
 		if (check_config(game))
-			return (free(line), 2);
+			return (2);
 		else
 			return (free(line), 0);
 	}
 	return (free(line), 1);
 }
 
-int extract_data(t_game *game)
+char	*buildline(char const *s1, char const *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	size_t	totallen;
+	char	*final_s;
+
+	len1 = 0;
+	if (s1)
+		len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	totallen = len1 + len2 + sizeof(char);
+	final_s = (char *)malloc(sizeof(char) * totallen);
+	if (final_s == NULL)
+		return (NULL);
+	if (*s1)
+		ft_strlcpy(final_s, s1, totallen);
+	ft_strlcat(final_s, s2, totallen);
+	return (final_s);
+}
+
+void extract_map(t_game *game)
+{
+	
+
+}
+
+void extract_data(t_game *game)
 {
 	char *line;
 	size_t line_len;
@@ -153,19 +182,15 @@ int extract_data(t_game *game)
 	{
 		line = get_next_line(game->fd);
 		if (!line)
-			return 0;
-		if (*line != '\n')
-		{
-			line_len = ft_strlen(line);
-			if (line[line_len - 1] == '\n')
-				line[line_len - 1] = 0;
-			process_ret = process_line(game, line);
-			if (process_ret == 2)
-				return (printf("MAP FOUND!\n"), 0);
-			else if (!process_ret)
-				return 1;
-		}
-		else
-			free(line);
+			return ;
+		line_len = ft_strlen(line);
+		if (line[line_len - 1] == '\n')
+			line[line_len - 1] = '\0';
+		process_ret = process_line(game, line);
+		if (process_ret == 2)
+			break ;
+		else if (!process_ret)
+			return ;
 	}
+	extract_map(game);
 }
