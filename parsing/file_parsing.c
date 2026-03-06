@@ -145,7 +145,7 @@ int process_line(t_game *game, char *line)
 	return (free(line), 1);
 }
 
-char	*buildline(char const *s1, char const *s2)
+char	*buildline(char *s1, char *s2)
 {
 	size_t	len1;
 	size_t	len2;
@@ -160,16 +160,38 @@ char	*buildline(char const *s1, char const *s2)
 	final_s = (char *)malloc(sizeof(char) * totallen);
 	if (final_s == NULL)
 		return (NULL);
-	if (*s1)
+	if (s1)
+	{
 		ft_strlcpy(final_s, s1, totallen);
-	ft_strlcat(final_s, s2, totallen);
+		ft_strlcat(final_s, s2, totallen);
+	}
+	else
+		ft_strlcpy(final_s, s2, totallen);
+	free(s1);
 	return (final_s);
 }
 
-void extract_map(t_game *game)
+void extract_map(t_game *game, char *map_start)
 {
-	
+	char *line;
+	char *map;
 
+	map = NULL;
+	line = map_start;
+	while (1)
+	{
+		map = buildline(map, line);
+		if (!map)
+			return (free(line)); //malloc error
+		free(line);
+		line = get_next_line(game->fd);
+		if (!line)
+			break ; //file reading over or malloc error
+	}
+	game->map.grid = ft_split(map, '\n');
+	free(map);
+	if (!game->map.grid)
+		return ; //malloc error
 }
 
 void extract_data(t_game *game)
@@ -192,5 +214,6 @@ void extract_data(t_game *game)
 		else if (!process_ret)
 			return ;
 	}
-	extract_map(game);
+	line[line_len - 1] = '\n';
+	extract_map(game, line);
 }

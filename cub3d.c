@@ -59,6 +59,12 @@ int	main(int ac, char **av)
 		close(game.fd);
 		return 1;
 	}
+	for (int i = 0; game.map.grid[i]; i++)
+	{
+		printf("%s\n", game.map.grid[i]);
+		free(game.map.grid[i]);
+	}
+	free(game.map.grid);
 	clean_config(&game);
 	close(game.fd);
 	return 0;
