@@ -31,10 +31,10 @@ char	**get_map(void)
 	map[1] = "10000000000001";
 	map[2] = "10000000000001";
 	map[3] = "10000000000001";
-	map[4] = "10000000000001";
-	map[5] = "10000000000001";
-	map[6] = "10000000000001";
-	map[7] = "10000000000001";
+	map[4] = "10000001000001";
+	map[5] = "10000001000001";
+	map[6] = "10000001000001";
+	map[7] = "11111111000001";
 	map[8] = "10000000000001";
 	map[9] = "11111111111111";
 	map[10] = NULL;
@@ -57,7 +57,7 @@ void	draw_map(t_game *game)
 		while (map[y][x])
 		{
 			if (map[y][x] == '1')
-				draw_square(x * 64, y * 64, 64, color, game);
+				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
 			x++;
 		}
 		y++;
@@ -71,6 +71,15 @@ int	draw_loop(t_game *game)
 	//draw_minimap(game); //por acabar
 	draw_square(game->player.x, game->player.y, 10, 0x00FF00, game);
 	draw_map(game);
+	float	fraction = PI / 3 / SWIDTH;
+	float	start_x = game->player.angle - PI / 6;
+	int	i = 0;
+	while (i < SWIDTH)
+	{
+		draw_line(&game->player, game, start_x);
+		start_x += fraction;
+		i++;
+	}
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 	return (0);
 }

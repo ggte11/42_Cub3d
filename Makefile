@@ -10,7 +10,7 @@ INCLUDES	= -I$(MLX_DIR) -I$(LIBFT_DIR)
 LIBS		= -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
 
 SRCS		= cub3d.c srcs/initializer.c srcs/player.c srcs/keys.c \
-			  srcs/minimap.c \
+			  srcs/minimap.c srcs/wall_col.c srcs/draw_lines.c \
 			  parsing/file_validation.c parsing/parse_file.c \
 			  parsing/parse_utils.c parsing/validate_map.c \
 			  

@@ -125,6 +125,9 @@ void	init_player(t_player *player);
 void	move_player(t_player *player);
 void	draw_square(int x, int y, int size, int color ,t_game *game);
 
+// Draw lines
+void	draw_line(t_player *player, t_game *game, float start_x);
+
 // Parsing
 int		print_error(char *msg);
 int		parse_file(char *filename);
@@ -132,5 +135,9 @@ int		parse_file(char *filename);
 // Minimap
 void	draw_tile(t_game *game, int x, int y, int color);
 void	draw_minimap(t_game *game);
+
+// Wall colision
+bool	touch_wall(float px, float py, t_game *game);
+
 
 #endif

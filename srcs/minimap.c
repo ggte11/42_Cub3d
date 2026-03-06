@@ -26,13 +26,13 @@ void	draw_tile(t_game *game, int x, int y, int color)
 
 static void	draw_player_minimap(t_game *game)
 {
-	int	size;
+	//int	size;
 	int	px;
 	int	py;
 	int	i;
 	int	j;
 
-	size = (int)(TILE * MINIMAP_SCALE);
+	//size = (int)(TILE * MINIMAP_SCALE);
 	px = MINIMAP_X + (int)(game->player.x * MINIMAP_SCALE);
 	py = MINIMAP_Y + (int)(game->player.y * MINIMAP_SCALE);
 	i = -2;
