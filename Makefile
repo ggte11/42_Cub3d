@@ -16,6 +16,7 @@ SRCS        = cub3d.c \
               parsing/file_validation.c \
               parsing/file_parsing.c \
               parsing/parse_utils.c \
+			  parsing/parse_utils2.c \
               parsing/validate_map.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

@@ -10,6 +10,15 @@ void init_config(t_game *game)
 	game->config.ceiling_color = -1;
 }
 
+void init_map(t_game *game)
+{
+	game->map.width = 0;
+	game->map.height = 0;
+	game->map.player_x = -1;
+	game->map.player_y = -1;
+	game->map.player_dir = '\0';
+}
+
 void clean_config(t_game *game)
 {
 	free(game->config.no_text);
@@ -52,6 +61,7 @@ int	main(int ac, char **av)
 	if (parse_file(&game, av[1]))
 		return (1);
 	init_config(&game);
+	init_map(&game);
 	extract_data(&game);
 	if (!validate_config(&game))
 	{
@@ -64,6 +74,8 @@ int	main(int ac, char **av)
 		printf("%s\n", game.map.grid[i]);
 		free(game.map.grid[i]);
 	}
+	printf("max width:%d\n", game.map.width);
+	printf("max height: %d\n", game.map.height);
 	free(game.map.grid);
 	clean_config(&game);
 	close(game.fd);

@@ -1,52 +1,5 @@
 #include "../cub3d.h"
 
-int skipwhitespace(char *str, int pos)
-{
-	int i;
-
-	i = pos;
-	while (str && str[i] && ft_isspace(str[i]))
-		i++;
-	return i;
-}
-
-int	count_elems(char const *s)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (s[i] == ' ')
-		i++;
-	while (s[i] != '\0')
-	{
-		if (s[i] != ' ' && (i == 0 || s[i - 1] == ' '))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-t_token find_token_type(char *line)
-{
-	if (*line == 'F' && line[1] == ' ')
-		return (F);
-	if (*line == 'C' && line[1] == ' ')
-		return (C);
-	if (*line == '1')
-		return (MAP);
-	if (!ft_strncmp(line, "NO", 2) && line[2] == ' ')
-		return (NO);
-	if (!ft_strncmp(line, "SO", 2) && line[2] == ' ')
-		return (SO);
-	if (!ft_strncmp(line, "WE", 2) && line[2] == ' ')
-		return (WE);
-	if (!ft_strncmp(line, "EA", 2) && line[2] == ' ')
-		return (EA);
-	return (ERROR);
-}
-
 int save_wall_text(t_game *game, char *wall, t_token type)
 {
 	unsigned int i;
@@ -71,27 +24,6 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 	if (type == EA && !game->config.ea_text)
 		return (game->config.ea_text = text, 1);
 	return (print_error(DBL_TEXT), free(text), 0);
-}
-
-static int parse_color_code(char *color, int *i)
-{
-	int value;
-	int delta_i;
-
-	value = 0;
-	delta_i = 0;
-	while (color[*i] && color[*i] != ',')
-	{
-		if (!ft_isdigit(color[*i]))
-			return (-1);
-		value = value * 10 + (color[*i] - '0');
-		(*i)++;
-		delta_i++;
-	}
-	if ((delta_i == 0 || delta_i > 3) || value > 255)
-		return (-1);
-	(*i)++;
-	return (value);
 }
 
 int save_color(t_game *game, char *color, t_token type)
@@ -145,53 +77,33 @@ int process_line(t_game *game, char *line)
 	return (free(line), 1);
 }
 
-char	*buildline(char *s1, char *s2)
-{
-	size_t	len1;
-	size_t	len2;
-	size_t	totallen;
-	char	*final_s;
-
-	len1 = 0;
-	if (s1)
-		len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	totallen = len1 + len2 + sizeof(char);
-	final_s = (char *)malloc(sizeof(char) * totallen);
-	if (final_s == NULL)
-		return (NULL);
-	if (s1)
-	{
-		ft_strlcpy(final_s, s1, totallen);
-		ft_strlcat(final_s, s2, totallen);
-	}
-	else
-		ft_strlcpy(final_s, s2, totallen);
-	free(s1);
-	return (final_s);
-}
-
 void extract_map(t_game *game, char *map_start)
 {
 	char *line;
 	char *map;
+	int line_len;
 
 	map = NULL;
 	line = map_start;
+	game->map.width = ft_strlen(line) - 1;
 	while (1)
 	{
 		map = buildline(map, line);
 		if (!map)
-			return (free(line)); //malloc error
+			return (print_error("Allocation error"), (line));
 		free(line);
 		line = get_next_line(game->fd);
 		if (!line)
-			break ; //file reading over or malloc error
+			break ;
+		line_len = ft_strlen(line) - 1;
+		if (line_len > game->map.width)
+			game->map.width = line_len;
+		game->map.height++;
 	}
 	game->map.grid = ft_split(map, '\n');
 	free(map);
 	if (!game->map.grid)
-		return ; //malloc error
+		print_error("Allocation error");
 }
 
 void extract_data(t_game *game)
