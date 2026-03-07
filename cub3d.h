@@ -79,12 +79,15 @@ typedef struct s_game
 /* ************************************************************************** */
 
 // Parsing
-int		print_error(char *msg);
+void	print_error(char *msg);
 int		parse_file(t_game *game, char *filename);
 int		skipwhitespace(char *str, int pos);
 int		count_elems(char const *s);
+t_token	find_token_type(char *line);
 int		parse_color_code(char *color, int *i);
+char	*buildline(char *s1, char *s2);
 void	extract_data(t_game *game);
 int		check_config(t_game *game);
+void	validate_map(t_map *map);
 
 #endif

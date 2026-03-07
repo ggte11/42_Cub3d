@@ -69,13 +69,9 @@ int	main(int ac, char **av)
 		close(game.fd);
 		return 1;
 	}
+	validate_map(&game.map);
 	for (int i = 0; game.map.grid[i]; i++)
-	{
-		printf("%s\n", game.map.grid[i]);
 		free(game.map.grid[i]);
-	}
-	printf("max width:%d\n", game.map.width);
-	printf("max height: %d\n", game.map.height);
 	free(game.map.grid);
 	clean_config(&game);
 	close(game.fd);

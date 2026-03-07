@@ -89,9 +89,9 @@ void extract_map(t_game *game, char *map_start)
 	while (1)
 	{
 		map = buildline(map, line);
-		if (!map)
-			return (print_error("Allocation error"), (line));
 		free(line);
+		if (!map)
+			return (print_error("Allocation error"));
 		line = get_next_line(game->fd);
 		if (!line)
 			break ;
