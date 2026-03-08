@@ -26,6 +26,9 @@
 # define ALL_ERR "Allocation error"
 # define RGB_ERR "Invalid RGB range or format"
 # define TYP_ERR "Invalid identifier"
+# define MAP_ERR "Invalid map format"
+# define M_TYP_ERR "Invalid map character"
+# define DBL_PLAYER "Double definition of player spawn point"
 
 /* ************************************************************************** */
 /*                                   STRUCTS                                  */
@@ -88,6 +91,7 @@ int		parse_color_code(char *color, int *i);
 char	*buildline(char *s1, char *s2);
 void	extract_data(t_game *game);
 int		check_config(t_game *game);
-void	validate_map(t_map *map);
+void	clean_map(char **map);
+int		validate_map(t_map *map);
 
 #endif

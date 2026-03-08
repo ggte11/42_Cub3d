@@ -12,6 +12,7 @@ void init_config(t_game *game)
 
 void init_map(t_game *game)
 {
+	game->map.grid = NULL;
 	game->map.width = 0;
 	game->map.height = 0;
 	game->map.player_x = -1;
@@ -25,6 +26,20 @@ void clean_config(t_game *game)
 	free(game->config.so_text);
 	free(game->config.ea_text);
 	free(game->config.we_text);
+}
+
+void clean_map(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map && map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+	map = NULL;
 }
 
 int check_config(t_game *game)
@@ -63,17 +78,13 @@ int	main(int ac, char **av)
 	init_config(&game);
 	init_map(&game);
 	extract_data(&game);
-	if (!validate_config(&game))
+	if (!validate_config(&game) || !validate_map(&game.map))
 	{
+		clean_map(game.map.grid);
 		clean_config(&game);
-		close(game.fd);
 		return 1;
 	}
-	validate_map(&game.map);
-	for (int i = 0; game.map.grid[i]; i++)
-		free(game.map.grid[i]);
-	free(game.map.grid);
+	clean_map(game.map.grid);
 	clean_config(&game);
-	close(game.fd);
 	return 0;
 }

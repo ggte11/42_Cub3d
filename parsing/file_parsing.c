@@ -85,17 +85,17 @@ void extract_map(t_game *game, char *map_start)
 
 	map = NULL;
 	line = map_start;
-	game->map.width = ft_strlen(line) - 1;
 	while (1)
 	{
 		map = buildline(map, line);
-		free(line);
 		if (!map)
-			return (print_error("Allocation error"));
+			return (print_error(ALL_ERR));
 		line = get_next_line(game->fd);
 		if (!line)
 			break ;
 		line_len = ft_strlen(line) - 1;
+		if (line_len == 0)
+			return (free(line), free(map), print_error(MAP_ERR));
 		if (line_len > game->map.width)
 			game->map.width = line_len;
 		game->map.height++;
@@ -126,6 +126,8 @@ void extract_data(t_game *game)
 		else if (!process_ret)
 			return ;
 	}
+	game->map.width = ft_strlen(line);
 	line[line_len - 1] = '\n';
 	extract_map(game, line);
+	close(game->fd);
 }

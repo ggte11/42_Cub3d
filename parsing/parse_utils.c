@@ -85,5 +85,6 @@ char	*buildline(char *s1, char *s2)
 	else
 		ft_strlcpy(final_s, s2, totallen);
 	free(s1);
+	free(s2);
 	return (final_s);
 }
