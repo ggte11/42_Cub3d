@@ -74,6 +74,7 @@ typedef struct s_image
 	int		height;
 }			t_image;
 
+// Key struct
 typedef struct s_key
 {
 	bool	w;
@@ -126,7 +127,7 @@ void	move_player(t_player *player);
 void	draw_square(int x, int y, int size, int color ,t_game *game);
 
 // Draw lines
-void	draw_line(t_player *player, t_game *game, float start_x);
+void	draw_line(t_player *player, t_game *game, float start_x, int i);
 
 // Parsing
 int		print_error(char *msg);

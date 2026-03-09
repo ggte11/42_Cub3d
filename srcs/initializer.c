@@ -69,14 +69,14 @@ int	draw_loop(t_game *game)
 	move_player(&game->player);
 	clear_image(game);
 	//draw_minimap(game); //por acabar
-	draw_square(game->player.x, game->player.y, 10, 0x00FF00, game);
-	draw_map(game);
+	//draw_square(game->player.x, game->player.y, 10, 0x00FF00, game);
+	//draw_map(game);
 	float	fraction = PI / 3 / SWIDTH;
 	float	start_x = game->player.angle - PI / 6;
 	int	i = 0;
 	while (i < SWIDTH)
 	{
-		draw_line(&game->player, game, start_x);
+		draw_line(&game->player, game, start_x, i);
 		start_x += fraction;
 		i++;
 	}
