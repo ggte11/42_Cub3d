@@ -20,6 +20,7 @@
 /* ************************************************************************** */
 
 # define FORM_ERR "Invalid file format"
+# define TEXT_EXT "Invalid texture extension"
 # define MISS_TEXT "Wall texture file doesn't exist or is inaccessible"
 # define DBL_TEXT "Double definition of wall texture"
 # define DBL_COLOR "Double definition of color"
@@ -83,6 +84,7 @@ typedef struct s_game
 
 // Parsing
 void	print_error(char *msg);
+int		check_ext(char *filename, char *ext);
 int		parse_file(t_game *game, char *filename);
 int		skipwhitespace(char *str, int pos);
 int		count_elems(char const *s);

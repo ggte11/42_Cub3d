@@ -13,6 +13,8 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 	text = ft_substr(wall, i, ft_strlen(wall + i) + 1);
 	if (!text)
 		return (print_error(ALL_ERR), 0);
+	if (!check_ext(text, ".xpm"))
+		return (print_error(TEXT_EXT), free(text), 0);
 	if (access(text, O_RDONLY))
 		return (print_error(MISS_TEXT), free(text), 0);
 	if (type == NO && !game->config.no_text)

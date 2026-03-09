@@ -121,7 +121,7 @@ int validate_map(t_map *map)
 	if (!map->grid)
 		return (0);
 	if (!normalize_map(map))
-		return (0); //Allocation error
+		return (0);
 	r_i = 0;
 	while (map->grid[r_i])
 	{
