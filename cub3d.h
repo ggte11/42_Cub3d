@@ -94,6 +94,7 @@ char	*buildline(char *s1, char *s2);
 void	extract_data(t_game *game);
 int		check_config(t_game *game);
 void	clean_map(char **map);
+int		normalize_map(t_map *map);
 int		validate_map(t_map *map);
 
 #endif

@@ -1,40 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 16:37:05 by ddamiba           #+#    #+#             */
+/*   Updated: 2026/03/11 16:46:58 by ddamiba          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
-int normalize_row(char **row, int row_len, int map_width)
+int	check_bounds(char *bound)
 {
-	char *n_row;
-
-	n_row = malloc(sizeof(char) * map_width + 1);
-	if (!n_row)
-		return (print_error(ALL_ERR), 0);
-	ft_memset(n_row, ' ', map_width);
-	n_row[map_width] = '\0';
-	ft_memcpy(n_row, *row, row_len);
-	free(*row);
-	*row = n_row;
-	return (1);
-}
-
-int normalize_map(t_map *map)
-{
-	int i;
-	int row_len;
-
-	i = 0;
-	while(map->grid[i])
-	{
-		row_len = ft_strlen(map->grid[i]);
-		if (row_len < map->width)
-			if (!normalize_row(&map->grid[i], row_len, map->width))
-				return (0);
-		i++;
-	}
-	return (1);
-}
-
-int check_bounds(char *bound)
-{
-	int i;
+	int	i;
 
 	i = 0;
 	while (bound[i])
@@ -46,7 +26,7 @@ int check_bounds(char *bound)
 	return (1);
 }
 
-int is_valid_map_char(char c)
+int	is_valid_map_char(char c)
 {
 	if (c == '1')
 		return (1);
@@ -65,7 +45,7 @@ int is_valid_map_char(char c)
 	return (0);
 }
 
-int validate_pos(char map_c, t_map *map, int row, int col)
+int	validate_pos(char map_c, t_map *map, int row, int col)
 {
 	if ((map_c == ' ' || map_c == '1'))
 		return (1);
@@ -89,10 +69,10 @@ int validate_pos(char map_c, t_map *map, int row, int col)
 	return (1);
 }
 
-int validate_row(t_map *map, int row)
+int	validate_row(t_map *map, int row)
 {
-	int c_i;
-	char map_c;
+	int		c_i;
+	char	map_c;
 
 	if (row == 0 || row == map->height)
 	{
@@ -114,9 +94,9 @@ int validate_row(t_map *map, int row)
 	return (1);
 }
 
-int validate_map(t_map *map)
+int	validate_map(t_map *map)
 {
-	int r_i;
+	int	r_i;
 
 	if (!map->grid)
 		return (0);

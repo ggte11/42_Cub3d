@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_parsing.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 16:36:11 by ddamiba           #+#    #+#             */
+/*   Updated: 2026/03/11 16:43:22 by ddamiba          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
-int save_wall_text(t_game *game, char *wall, t_token type)
+int	save_wall_text(t_game *game, char *wall, t_token type)
 {
-	unsigned int i;
-	char *text;
+	unsigned int	i;
+	char			*text;
 
 	if (count_elems(wall) != 2)
 		return (print_error(FORM_ERR), 0);
@@ -28,32 +40,32 @@ int save_wall_text(t_game *game, char *wall, t_token type)
 	return (print_error(DBL_TEXT), free(text), 0);
 }
 
-int save_color(t_game *game, char *color, t_token type)
+int	save_color(t_game *game, char *color, t_token type)
 {
-	int i;
-	int R;
-	int G;
-	int B;
+	int	i;
+	int	r;
+	int	g;
+	int	b;
 
 	if (count_elems(color) != 2)
 		return (print_error(FORM_ERR), 0);
 	i = skipwhitespace(color, 1);
-	R = parse_color_code(color, &i);
-	G = parse_color_code(color, &i);
-	B = parse_color_code(color, &i);
-	if (R == -1 || G == -1 || B == -1)
+	r = parse_color_code(color, &i);
+	g = parse_color_code(color, &i);
+	b = parse_color_code(color, &i);
+	if (r == -1 || g == -1 || b == -1)
 		return (print_error(RGB_ERR), 0);
 	if (type == F && game->config.floor_color == -1)
-		return (game->config.floor_color = ((R << 16) | (G << 8) | B), 1);
+		return (game->config.floor_color = ((r << 16) | (g << 8) | b), 1);
 	if (type == C && game->config.ceiling_color == -1)
-		return (game->config.ceiling_color = ((R << 16) | (G << 8) | B), 1);
+		return (game->config.ceiling_color = ((r << 16) | (g << 8) | b), 1);
 	return (print_error(DBL_COLOR), 0);
 }
 
-int process_line(t_game *game, char *line)
+int	process_line(t_game *game, char *line)
 {
-	int i;
-	t_token type;
+	int		i;
+	t_token	type;
 
 	if (*line == '\0')
 		return (free(line), 1);
@@ -79,11 +91,11 @@ int process_line(t_game *game, char *line)
 	return (free(line), 1);
 }
 
-void extract_map(t_game *game, char *map_start)
+void	extract_map(t_game *game, char *map_start)
 {
-	char *line;
-	char *map;
-	int line_len;
+	char	*line;
+	char	*map;
+	int		line_len;
 
 	map = NULL;
 	line = map_start;
@@ -108,11 +120,11 @@ void extract_map(t_game *game, char *map_start)
 		print_error("Allocation error");
 }
 
-void extract_data(t_game *game)
+void	extract_data(t_game *game)
 {
-	char *line;
-	size_t line_len;
-	int process_ret;
+	char	*line;
+	size_t	line_len;
+	int		process_ret;
 
 	while (1)
 	{

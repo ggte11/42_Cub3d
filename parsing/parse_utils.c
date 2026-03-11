@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/11 16:36:42 by ddamiba           #+#    #+#             */
+/*   Updated: 2026/03/11 16:46:03 by ddamiba          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	print_error(char *msg)
 {
-	static int has_printed;
+	static int	has_printed;
 
 	if (!has_printed)
 	{
@@ -13,14 +25,14 @@ void	print_error(char *msg)
 	}
 }
 
-int skipwhitespace(char *str, int pos)
+int	skipwhitespace(char *str, int pos)
 {
-	int i;
+	int	i;
 
 	i = pos;
 	while (str && str[i] && ft_isspace(str[i]))
 		i++;
-	return i;
+	return (i);
 }
 
 int	count_elems(char const *s)
@@ -41,10 +53,10 @@ int	count_elems(char const *s)
 	return (count);
 }
 
-int parse_color_code(char *color, int *i)
+int	parse_color_code(char *color, int *i)
 {
-	int value;
-	int delta_i;
+	int	value;
+	int	delta_i;
 
 	value = 0;
 	delta_i = 0;
