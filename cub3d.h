@@ -42,6 +42,7 @@
 /*                                   STRUCTS                                  */
 /* ************************************************************************** */
 
+// map struct
 typedef struct s_map
 {
 	char	**grid;
@@ -52,6 +53,7 @@ typedef struct s_map
 	char	player_dir;
 }			t_map;
 
+// sprite struct
 typedef struct s_config
 {
 	char	*no_text;
@@ -61,6 +63,21 @@ typedef struct s_config
 	int		floor_color;
 	int		ceiling_color;
 }			t_config;
+
+// ray struct
+typedef struct s_rays
+{
+	float	dir_x;
+	float	dir_y;
+	float	delta_x;
+	float	delta_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		wall_dir;
+}			t_rays;
 
 // Image struct
 typedef struct s_image

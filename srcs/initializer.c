@@ -87,7 +87,7 @@ int	draw_loop(t_game *game)
 void	init_game(t_game *game)
 {
 	init_player(&game->player);
-	game->map.grid = get_map(); 
+	game->map.grid = get_map();
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3d");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
