@@ -6,7 +6,7 @@
 /*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:23 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/11 16:44:30 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:47:29 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	normalize_map(t_map *map)
 	while (map->grid[i])
 	{
 		row_len = ft_strlen(map->grid[i]);
-		if (row_len < map->width)
-			if (!normalize_row(&map->grid[i], row_len, map->width))
+		if (row_len < map->m_width)
+			if (!normalize_row(&map->grid[i], row_len, map->m_width))
 				return (0);
 		i++;
 	}

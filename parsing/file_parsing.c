@@ -6,7 +6,7 @@
 /*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:11 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/11 16:43:22 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:45:10 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,9 @@ void	extract_map(t_game *game, char *map_start)
 		line_len = ft_strlen(line) - 1;
 		if (line_len == 0)
 			return (free(line), free(map), print_error(MAP_ERR));
-		if (line_len > game->map.width)
-			game->map.width = line_len;
-		game->map.height++;
+		if (line_len > game->map.m_width)
+			game->map.m_width = line_len;
+		game->map.m_height++;
 	}
 	game->map.grid = ft_split(map, '\n');
 	free(map);
@@ -140,7 +140,7 @@ void	extract_data(t_game *game)
 		else if (!process_ret)
 			return ;
 	}
-	game->map.width = ft_strlen(line);
+	game->map.m_width = ft_strlen(line);
 	line[line_len - 1] = '\n';
 	extract_map(game, line);
 	close(game->fd);

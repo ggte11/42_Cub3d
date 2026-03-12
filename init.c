@@ -13,8 +13,8 @@ void init_config(t_game *game)
 void init_map(t_game *game)
 {
 	game->map.grid = NULL;
-	game->map.width = 0;
-	game->map.height = 0;
+	game->map.m_width = 0;
+	game->map.m_height = 0;
 	game->map.player_x = -1;
 	game->map.player_y = -1;
 	game->map.player_dir = '\0';

@@ -6,7 +6,7 @@
 /*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:37:05 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/11 16:46:58 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/03/12 16:47:51 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	validate_pos(char map_c, t_map *map, int row, int col)
 {
 	if ((map_c == ' ' || map_c == '1'))
 		return (1);
-	if (col == 0 || col == map->width - 1)
+	if (col == 0 || col == map->m_width - 1)
 		return (0);
 	if (map->grid[row][col - 1] == ' ' || map->grid[row][col + 1] == ' ')
 		return (0);
@@ -74,7 +74,7 @@ int	validate_row(t_map *map, int row)
 	int		c_i;
 	char	map_c;
 
-	if (row == 0 || row == map->height)
+	if (row == 0 || row == map->m_height)
 	{
 		if (check_bounds(map->grid[row]))
 			return (1);
