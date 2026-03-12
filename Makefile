@@ -19,7 +19,12 @@ SRCS        = cub3d.c \
               parsing/parse_utils.c \
 			  parsing/parse_utils2.c \
 			  parsing/normalize_map.c \
-              parsing/validate_map.c
+              parsing/validate_map.c \
+			  srcs/initializer.c \
+			  srcs/player.c srcs/keys.c \
+			  srcs/minimap.c \
+			  srcs/wall_col.c \
+			  srcs/draw_lines.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
@@ -44,6 +49,7 @@ $(LIBFT):
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)/parsing
+	@mkdir -p $(OBJ_DIR)/srcs
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
 	@echo "$(CYAN)🔨 Compiling $(YELLOW)$<$(RESET)"

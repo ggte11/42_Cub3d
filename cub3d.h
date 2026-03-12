@@ -6,6 +6,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <stdbool.h>
 # include <math.h>
 # include <sys/time.h>
 # include <X11/X.h>
@@ -13,11 +14,30 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
-# include "libft/get_next_line/get_next_line.h"
 
 /* ************************************************************************** */
 /*                                   DEFINES                                  */
 /* ************************************************************************** */
+
+# define SWIDTH 1280		// Screen width
+# define SHEIGHT 720		// Screen height
+# define BLOCK 64			// Block size of player
+# define TILE 24			// Tile size minimap (24x24)
+# define MINIMAP_SCALE 0.5
+# define MINIMAP_X 10
+# define MINIMAP_Y 10
+
+# define W 119				// W key
+# define S 115				// S key
+# define A 97				// A key
+# define D 100				// D key
+
+# define ARROW_LEFT 65361
+# define ARROW_RIGHT 65363
+# define ESC 65307
+
+# define PI 3.14159265359
+# include "libft/get_next_line/get_next_line.h"
 
 # define FORM_ERR "Invalid file format"
 # define TEXT_EXT "Invalid texture extension"
@@ -50,13 +70,14 @@ typedef enum e_token
 typedef struct s_map
 {
 	char	**grid;
-	int		width;
-	int		height;
+	int		m_width;
+	int		m_height;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
 }			t_map;
 
+// sprite struct
 typedef struct s_config
 {
 	char	*no_text;
@@ -67,6 +88,52 @@ typedef struct s_config
 	int		ceiling_color;
 }			t_config;
 
+// ray struct
+typedef struct s_rays
+{
+	float	dir_x;
+	float	dir_y;
+	float	delta_x;
+	float	delta_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		wall_dir;
+}			t_rays;
+
+// Image struct
+typedef struct s_image
+{
+	void	*img;
+	int		size_line;
+	char	*data;
+	int		bpp;
+	int		endian;
+	int		width;
+	int		height;
+}			t_image;
+
+// Key struct
+typedef struct s_key
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	l_arrow;
+	bool	r_arrow;
+}			t_key;
+
+// Player struct
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	t_key	key;
+}			t_player;
 
 // Main struct
 typedef struct s_game
@@ -76,11 +143,33 @@ typedef struct s_game
 	int			fd;
 	t_map		map;
 	t_config	config;
-}		t_game;
+	t_image		image;
+	t_player	player;
+}				t_game;
 
 /* ************************************************************************** */
 /*                                 FUNCTIONS                                  */
 /* ************************************************************************** */
+
+// initializer
+void	init_game(t_game *game);
+void	put_pixel(int x, int y, int color, t_game *game);
+int		draw_loop(t_game *game);
+void	clear_image(t_game *game);
+void	draw_map(t_game *game);
+
+
+// keys
+int		key_press(int keycode, t_player *player);
+int		key_realease(int keycode, t_player *player);
+
+// player
+void	init_player(t_player *player);
+void	move_player(t_player *player);
+void	draw_square(int x, int y, int size, int color ,t_game *game);
+
+// Draw lines
+void	draw_line(t_player *player, t_game *game, float start_x, int i);
 
 // Parsing
 void	print_error(char *msg);
@@ -98,5 +187,12 @@ int		check_config(t_game *game);
 void	clean_map(char **map);
 int		normalize_map(t_map *map);
 int		validate_map(t_map *map);
+// Minimap
+void	draw_tile(t_game *game, int x, int y, int color);
+void	draw_minimap(t_game *game);
+
+// Wall colision
+bool	touch_wall(float px, float py, t_game *game);
+
 
 #endif
