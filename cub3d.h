@@ -10,8 +10,8 @@
 # include <sys/time.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
-//# include "minilibx-linux/mlx.h"
-//# include "minilibx-linux/mlx_int.h"
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
 # include "libft/get_next_line/get_next_line.h"
 
@@ -84,6 +84,8 @@ typedef struct s_game
 
 // Parsing
 void	print_error(char *msg);
+void	init_config(t_game *game);
+void	init_map(t_game *game);
 int		check_ext(char *filename, char *ext);
 int		parse_file(t_game *game, char *filename);
 int		skipwhitespace(char *str, int pos);

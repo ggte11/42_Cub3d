@@ -1,25 +1,5 @@
 #include "cub3d.h"
 
-void init_config(t_game *game)
-{
-	game->config.no_text = NULL;
-	game->config.so_text = NULL;
-	game->config.ea_text = NULL;
-	game->config.we_text = NULL;
-	game->config.floor_color = -1;
-	game->config.ceiling_color = -1;
-}
-
-void init_map(t_game *game)
-{
-	game->map.grid = NULL;
-	game->map.width = 0;
-	game->map.height = 0;
-	game->map.player_x = -1;
-	game->map.player_y = -1;
-	game->map.player_dir = '\0';
-}
-
 void clean_config(t_game *game)
 {
 	free(game->config.no_text);
@@ -69,7 +49,6 @@ int validate_config(t_game *game)
 int	main(int ac, char **av)
 {
 	t_game game;
-
 
 	if (ac != 2)
 		return (print_error("Invalid number of args"), 1);

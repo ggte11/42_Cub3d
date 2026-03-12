@@ -9,15 +9,16 @@ MLX         = $(MLX_DIR)/libmlx.a
 LIBFT       = $(LIBFT_DIR)/libft.a
 GNL			= $(GNL_DIR)/get_next_line.a
 INCLUDES    = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(GNL_DIR)
-#LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -lft -lXext -lX11 -lm
-LIBS        = -L$(MLX_DIR) -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
+LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
+#LIBS        = -L$(MLX_DIR) -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
 
 SRCS        = cub3d.c \
+			  init.c \
               parsing/file_validation.c \
               parsing/file_parsing.c \
               parsing/parse_utils.c \
 			  parsing/parse_utils2.c \
-			  parsing/normalize_map \
+			  parsing/normalize_map.c \
               parsing/validate_map.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -29,7 +30,8 @@ BLUE        = \033[0;34m
 CYAN        = \033[0;36m
 RESET       = \033[0m
 
-all: $(LIBFT) $(GNL) $(NAME)
+#all: $(LIBFT) $(GNL) $(NAME)
+all: $(LIBFT) $(GNL) $(MLX) $(NAME)
 
 $(MLX):
 	@echo "$(CYAN)🔨 Building minilibx...$(RESET)"
