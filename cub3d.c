@@ -52,17 +52,18 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (print_error("Invalid number of args"), 1);
-	if (parse_file(&game, av[1]))
-		return (1);
 	init_config(&game);
 	init_map(&game);
+	if (parse_file(&game, av[1]))
+		return (1);
 	extract_data(&game);
 	if (!validate_config(&game) || !validate_map(&game.map))
-	{
-		clean_map(game.map.grid);
-		clean_config(&game);
-		return 1;
-	}
+		return (clean_map(game.map.grid), clean_config(&game), 1);
+	init_game(&game);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
+	mlx_hook(game.win, 3, 1L << 1, key_realease, &game.player);
+	mlx_loop_hook(game.mlx, draw_loop, &game);
+	mlx_loop(game.mlx);
 	clean_map(game.map.grid);
 	clean_config(&game);
 	return 0;

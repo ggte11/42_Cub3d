@@ -66,14 +66,15 @@ void	draw_map(t_game *game)
 
 int	draw_loop(t_game *game)
 {
+	float	fraction;
+	float	start_x;
+	int		i;
+
 	move_player(&game->player);
 	clear_image(game);
-	//draw_minimap(game); //por acabar
-	//draw_square(game->player.x, game->player.y, 10, 0x00FF00, game);
-	//draw_map(game);
-	float	fraction = PI / 3 / SWIDTH;
-	float	start_x = game->player.angle - PI / 6;
-	int	i = 0;
+	fraction = PI / 3 / SWIDTH;
+	start_x = game->player.angle - PI / 6;
+	i = 0;
 	while (i < SWIDTH)
 	{
 		draw_line(&game->player, game, start_x, i);
@@ -86,8 +87,7 @@ int	draw_loop(t_game *game)
 
 void	init_game(t_game *game)
 {
-	init_player(&game->player);
-	game->map.grid = get_map();
+	init_player(game);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3d");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);

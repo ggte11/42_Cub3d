@@ -12,19 +12,20 @@ INCLUDES    = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(GNL_DIR)
 LIBS        = -L$(MLX_DIR) -lmlx -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
 #LIBS        = -L$(MLX_DIR) -L$(LIBFT_DIR) -L$(GNL_DIR) -lft -lXext -lX11 -lm
 
-SRCS        = cub3d.c \
+SRCS		  = cub3d.c \
 			  init.c \
-              parsing/file_validation.c \
-              parsing/file_parsing.c \
-              parsing/parse_utils.c \
+			  parsing/file_validation.c \
+			  parsing/file_parsing.c \
+			  parsing/parse_utils.c \
 			  parsing/parse_utils2.c \
 			  parsing/normalize_map.c \
-              parsing/validate_map.c \
+			  parsing/validate_map.c \
 			  srcs/initializer.c \
 			  srcs/player.c srcs/keys.c \
 			  srcs/minimap.c \
 			  srcs/wall_col.c \
-			  srcs/draw_lines.c
+			  srcs/draw_lines.c \
+			  srcs/raycast.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 

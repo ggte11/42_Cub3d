@@ -1,39 +1,44 @@
 #include "../cub3d.h"
 
-static float	distance(float x, float y)
+static int	get_wall_height(float dist)
 {
-	return (sqrt((x * x) + (y * y)));
+	if (dist < 0.001f)
+		dist = 0.001f;
+	return ((int)(SHEIGHT / dist));
 }
 
-float	fixed_dist(float x1, float y1, float x2, float y2, t_game *game)
+static void	draw_vertical(t_game *game, int x, int start, int end, int color)
 {
-	float	delta_x = x2 - x1;
-	float	delta_y = y2 - y1;
-	float	angle = atan2(delta_y, delta_x) - game->player.angle;
-	float	fix_dist = distance(delta_x, delta_y) * cos(angle);
-	return (fix_dist);
+	int	y;
+
+	if (start < 0)
+		start = 0;
+	if (end >= SHEIGHT)
+		end = SHEIGHT - 1;
+	y = start;
+	while (y <= end)
+	{
+		put_pixel(x, y, color, game);
+		y++;
+	}
 }
 
-void	draw_line(t_player *player, t_game *game, float start_x, int i)
+void	draw_line(t_player *player, t_game *game, float angle, int x)
 {
-	float	cos_angle = cos(start_x);
-	float	sin_angle = sin(start_x);
-	float	ray_x = player->x;
-	float	ray_y = player->y;
+	float	dist;
+	int		side;
+	int		height;
+	int		start;
+	int		end;
+	int		color;
 
-	while (!touch_wall(ray_x, ray_y, game))
-	{
-		//put_pixel(ray_x, ray_y, 0xFF0000, game);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
-	}
-	float	dist = fixed_dist(player->x, player->y, ray_x, ray_y, game);
-	float	height = (BLOCK / dist) * (SWIDTH / 2);
-	int		start_y = (SHEIGHT - height) / 2;
-	int		end = start_y + height;
-	while (start_y < end)
-	{
-		put_pixel(i, start_y, 0x0000FF, game);
-		start_y++;
-	}
+	(void)player;
+	dist = cast_ray_dda(game, angle, &side);
+	height = get_wall_height(dist);
+	start = (SHEIGHT - height) / 2;
+	end = (SHEIGHT + height) / 2;
+	color = 0x0000FF;
+	if (side == 1)
+		color = 0x000099;
+	draw_vertical(game, x, start, end, color);
 }

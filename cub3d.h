@@ -26,6 +26,8 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_X 10
 # define MINIMAP_Y 10
+# define MOVE_SPEED 2.0f	// Player movement speed
+# define ROT_SPEED 0.05f	// Player rotation speed
 
 # define W 119				// W key
 # define S 115				// S key
@@ -145,6 +147,7 @@ typedef struct s_game
 	t_config	config;
 	t_image		image;
 	t_player	player;
+	t_rays		ray;
 }				t_game;
 
 /* ************************************************************************** */
@@ -164,12 +167,12 @@ int		key_press(int keycode, t_player *player);
 int		key_realease(int keycode, t_player *player);
 
 // player
-void	init_player(t_player *player);
+void	init_player(t_game *game);
 void	move_player(t_player *player);
 void	draw_square(int x, int y, int size, int color ,t_game *game);
 
 // Draw lines
-void	draw_line(t_player *player, t_game *game, float start_x, int i);
+void	draw_line(t_player *player, t_game *game, float angle, int x);
 
 // Parsing
 void	print_error(char *msg);
@@ -187,6 +190,7 @@ int		check_config(t_game *game);
 void	clean_map(char **map);
 int		normalize_map(t_map *map);
 int		validate_map(t_map *map);
+
 // Minimap
 void	draw_tile(t_game *game, int x, int y, int color);
 void	draw_minimap(t_game *game);
@@ -194,5 +198,7 @@ void	draw_minimap(t_game *game);
 // Wall colision
 bool	touch_wall(float px, float py, t_game *game);
 
+// Raycasting
+float	cast_ray_dda(t_game *game, float angle, int *side);
 
 #endif

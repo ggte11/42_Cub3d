@@ -1,17 +1,29 @@
 #include "../cub3d.h"
 
-void	init_player(t_player *player)
+static float	get_spawn_angle(char dir)
 {
-	player->x = SWIDTH / 2;
-	player->y = SHEIGHT / 2;
-	player->angle = PI / 2;
+	if (dir == 'N')
+		return (3 * PI / 2);
+	if (dir == 'S')
+		return (PI / 2);
+	if (dir == 'E')
+		return (0.0f);
+	if (dir == 'W')
+		return (PI);
+	return (0.0f);
+}
 
-	player->key.w = false;
-	player->key.s = false;
-	player->key.a = false;
-	player->key.d = false;
-	player->key.l_arrow = false;
-	player->key.r_arrow = false;
+void	init_player(t_game *game)
+{
+	game->player.x = (game->map.player_x + 0.5f) * BLOCK;
+	game->player.y = (game->map.player_y + 0.5f) * BLOCK;
+	game->player.angle = get_spawn_angle(game->map.player_dir);
+	game->player.key.w = false;
+	game->player.key.s = false;
+	game->player.key.a = false;
+	game->player.key.d = false;
+	game->player.key.l_arrow = false;
+	game->player.key.r_arrow = false;
 }
 
 void	move_player(t_player *player)
@@ -21,8 +33,8 @@ void	move_player(t_player *player)
 	float	cos_angle;
 	float	sin_angle;
 
-	speed = 5;
-	angle_speed = 0.1;
+	speed = MOVE_SPEED;
+	angle_speed = ROT_SPEED;
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
 	if (player->key.l_arrow)
