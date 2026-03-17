@@ -26,15 +26,22 @@ static void	draw_vertical(t_game *game, int x, int start, int end, int color)
 void	draw_line(t_player *player, t_game *game, float angle, int x)
 {
 	float	dist;
+	float	corr_dist;
+	float	angle_diff;
 	int		side;
 	int		height;
 	int		start;
 	int		end;
 	int		color;
 
-	(void)player;
 	dist = cast_ray_dda(game, angle, &side);
-	height = get_wall_height(dist);
+	angle_diff = angle - player->angle;
+	if (angle_diff > PI)
+		angle_diff -= 2 * PI;
+	else if (angle_diff < -PI)
+		angle_diff += 2 * PI;
+	corr_dist = dist * cos(angle_diff);
+	height = get_wall_height(corr_dist);
 	start = (SHEIGHT - height) / 2;
 	end = (SHEIGHT + height) / 2;
 	color = 0x0000FF;

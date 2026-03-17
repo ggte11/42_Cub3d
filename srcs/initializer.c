@@ -24,23 +24,6 @@ void	clear_image(t_game *game)
 	}
 }
 
-char	**get_map(void)
-{
-	char	**map = malloc(sizeof(char *) * 11);
-	map[0] = "11111111111111";
-	map[1] = "10000000000001";
-	map[2] = "10000000000001";
-	map[3] = "10000000000001";
-	map[4] = "10000001000001";
-	map[5] = "10000001000001";
-	map[6] = "10000001000001";
-	map[7] = "11111111000001";
-	map[8] = "10000000000001";
-	map[9] = "11111111111111";
-	map[10] = NULL;
-	return (map);
-}
-
 void	draw_map(t_game *game)
 {
 	char	**map;
@@ -74,6 +57,7 @@ int	draw_loop(t_game *game)
 	clear_image(game);
 	fraction = PI / 3 / SWIDTH;
 	start_x = game->player.angle - PI / 6;
+	draw_minimap(game);
 	i = 0;
 	while (i < SWIDTH)
 	{
@@ -88,6 +72,7 @@ int	draw_loop(t_game *game)
 void	init_game(t_game *game)
 {
 	init_player(game);
+	init_minimap(game);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3d");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);

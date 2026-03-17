@@ -117,6 +117,16 @@ typedef struct s_image
 	int		height;
 }			t_image;
 
+// Minimap struct
+typedef struct s_minimap
+{
+	int	x;
+	int	y;
+	int	t_size;
+	int	width;
+	int	height;
+}		t_minimap;
+
 // Key struct
 typedef struct s_key
 {
@@ -148,6 +158,7 @@ typedef struct s_game
 	t_image		image;
 	t_player	player;
 	t_rays		ray;
+	t_minimap	mm;
 }				t_game;
 
 /* ************************************************************************** */
@@ -192,6 +203,7 @@ int		normalize_map(t_map *map);
 int		validate_map(t_map *map);
 
 // Minimap
+void	init_minimap(t_game *game);
 void	draw_tile(t_game *game, int x, int y, int color);
 void	draw_minimap(t_game *game);
 

@@ -48,7 +48,7 @@ int validate_config(t_game *game)
 
 int	main(int ac, char **av)
 {
-	t_game game;
+	t_game	game;
 
 	if (ac != 2)
 		return (print_error("Invalid number of args"), 1);
