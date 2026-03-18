@@ -57,7 +57,6 @@ int	draw_loop(t_game *game)
 	clear_image(game);
 	fraction = PI / 3 / SWIDTH;
 	start_x = game->player.angle - PI / 6;
-	draw_minimap(game);
 	i = 0;
 	while (i < SWIDTH)
 	{
@@ -65,6 +64,7 @@ int	draw_loop(t_game *game)
 		start_x += fraction;
 		i++;
 	}
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 	return (0);
 }
