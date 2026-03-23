@@ -2,6 +2,8 @@
 
 int	key_press(int keycode, t_player *player)
 {
+	if (keycode == ESC)
+		exit(0);
 	if (keycode == W)
 		player->key.w = true;
 	if (keycode == S)

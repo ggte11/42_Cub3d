@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:37:05 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/12 16:47:51 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/03/23 18:09:13 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ int	validate_map(t_map *map)
 			return (0);
 		r_i++;
 	}
+	if (!map->player_dir)
+		return (print_error(MISS_PLAYER), 0);
 	return (1);
 }

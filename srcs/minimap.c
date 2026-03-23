@@ -69,10 +69,10 @@ void	draw_minimap(t_game *game)
 	char	c;
 
 	y = 0;
-	while (y <= game->map.m_height)
+	while (game->map.grid[y])
 	{
 		x = 0;
-		while (x < game->map.m_width && game->map.grid[y][x])
+		while (x < game->map.m_width)
 		{
 			c = game->map.grid[y][x];
 			if (c == '1')

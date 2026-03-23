@@ -26,8 +26,8 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_X 10
 # define MINIMAP_Y 10
-# define MOVE_SPEED 2.0f	// Player movement speed
-# define ROT_SPEED 0.05f	// Player rotation speed
+# define MOVE_SPEED 2.2f	// Player movement speed
+# define ROT_SPEED 0.06f	// Player rotation speed
 
 # define W 119				// W key
 # define S 115				// S key
@@ -52,6 +52,7 @@
 # define MAP_ERR "Invalid map format"
 # define M_TYP_ERR "Invalid map character"
 # define DBL_PLAYER "Double definition of player spawn point"
+# define MISS_PLAYER "Missing player spawn point definition"
 
 /* ************************************************************************** */
 /*                                   STRUCTS                                  */
@@ -167,10 +168,15 @@ typedef struct s_game
 
 // initializer
 void	init_game(t_game *game);
+void	init_player(t_game *game);
 void	put_pixel(int x, int y, int color, t_game *game);
 int		draw_loop(t_game *game);
 void	clear_image(t_game *game);
 void	draw_map(t_game *game);
+
+// free hub
+void	clean_config(t_game *game);
+void	clean_map(char **map);
 
 
 // keys
@@ -178,9 +184,12 @@ int		key_press(int keycode, t_player *player);
 int		key_realease(int keycode, t_player *player);
 
 // player
-void	init_player(t_game *game);
-void	move_player(t_player *player);
+void	move_player(t_game *game);
+
+// player utils
 void	draw_square(int x, int y, int size, int color ,t_game *game);
+bool	can_move_to(t_game *game, float x, float y, float r);
+float	get_spawn_angle(char dir);
 
 // Draw lines
 void	draw_line(t_player *player, t_game *game, float angle, int x);

@@ -1,27 +1,5 @@
 #include "cub3d.h"
 
-void clean_config(t_game *game)
-{
-	free(game->config.no_text);
-	free(game->config.so_text);
-	free(game->config.ea_text);
-	free(game->config.we_text);
-}
-
-void clean_map(char **map)
-{
-	int i;
-
-	i = 0;
-	while (map && map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-	map = NULL;
-}
-
 int check_config(t_game *game)
 {
 	if (!game->config.no_text)
@@ -46,6 +24,14 @@ int validate_config(t_game *game)
 	return (1);
 }
 
+int	on_destroy(t_game *game)
+{
+	clean_map(game->map.grid);
+	clean_config(game);
+	exit(0);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -62,6 +48,7 @@ int	main(int ac, char **av)
 	init_game(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_realease, &game.player);
+	mlx_hook(game.win, 17, 1L << 17, (int (*)())on_destroy, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
 	clean_map(game.map.grid);

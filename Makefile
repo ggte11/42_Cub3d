@@ -22,6 +22,8 @@ SRCS		  = cub3d.c \
 			  parsing/validate_map.c \
 			  srcs/initializer.c \
 			  srcs/player.c srcs/keys.c \
+			  srcs/player_utils.c \
+			  srcs/free_hub.c \
 			  srcs/minimap.c \
 			  srcs/wall_col.c \
 			  srcs/draw_lines.c \
