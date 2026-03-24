@@ -64,6 +64,7 @@ typedef enum e_token
 	SO,
 	WE,
 	EA,
+	DIR_COUNT,
 	F,
 	C,
 	MAP,
@@ -81,15 +82,13 @@ typedef struct s_map
 }			t_map;
 
 // sprite struct
-typedef struct s_config
+typedef struct s_tex
 {
-	char	*no_text;
-	char	*so_text;
-	char	*we_text;
-	char	*ea_text;
+	char	*path[DIR_COUNT];
+	t_image	img[DIR_COUNT];
 	int		floor_color;
 	int		ceiling_color;
-}			t_config;
+}			t_tex;
 
 // ray struct
 typedef struct s_rays
@@ -155,7 +154,7 @@ typedef struct s_game
 	void		*win;
 	int			fd;
 	t_map		map;
-	t_config	config;
+	t_tex		texture;
 	t_image		image;
 	t_player	player;
 	t_rays		ray;

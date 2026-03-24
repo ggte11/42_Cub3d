@@ -2,10 +2,10 @@
 
 void	clean_config(t_game *game)
 {
-	free(game->config.no_text);
-	free(game->config.so_text);
-	free(game->config.ea_text);
-	free(game->config.we_text);
+	free(game->texture.path[NO]);
+	free(game->texture.path[SO]);
+	free(game->texture.path[WE]);
+	free(game->texture.path[EA]);
 }
 
 void	clean_map(char **map)

@@ -2,17 +2,17 @@
 
 int check_config(t_game *game)
 {
-	if (!game->config.no_text)
+	if (!game->texture.path[NO])
 		return (0);
-	if (!game->config.so_text)
+	if (!game->texture.path[SO])
 		return (0);
-	if (!game->config.ea_text)
+	if (!game->texture.path[WE])
 		return (0);
-	if (!game->config.we_text)
+	if (!game->texture.path[EA])
 		return (0);
-	if (game->config.floor_color == -1)
+	if (game->texture.floor_color == -1)
 		return (0);
-	if (game->config.ceiling_color == -1)
+	if (game->texture.ceiling_color == -1)
 		return (0);
 	return (1);
 }
