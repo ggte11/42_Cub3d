@@ -81,15 +81,6 @@ typedef struct s_map
 	char	player_dir;
 }			t_map;
 
-// sprite struct
-typedef struct s_tex
-{
-	char	*path[DIR_COUNT];
-	t_image	img[DIR_COUNT];
-	int		floor_color;
-	int		ceiling_color;
-}			t_tex;
-
 // ray struct
 typedef struct s_rays
 {
@@ -116,6 +107,15 @@ typedef struct s_image
 	int		width;
 	int		height;
 }			t_image;
+
+// sprite struct
+typedef struct s_tex
+{
+	char	*path[4];
+	t_image	img[4];
+	int		floor_color;
+	int		ceiling_color;
+}			t_tex;
 
 // Minimap struct
 typedef struct s_minimap

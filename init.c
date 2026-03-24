@@ -2,12 +2,12 @@
 
 void init_config(t_game *game)
 {
-	game->config.no_text = NULL;
-	game->config.so_text = NULL;
-	game->config.ea_text = NULL;
-	game->config.we_text = NULL;
-	game->config.floor_color = -1;
-	game->config.ceiling_color = -1;
+	game->texture.path[NO] = NULL;
+	game->texture.path[SO] = NULL;
+	game->texture.path[WE] = NULL;
+	game->texture.path[EA] = NULL;
+	game->texture.floor_color = -1;
+	game->texture.ceiling_color = -1;
 }
 
 void init_map(t_game *game)

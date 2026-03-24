@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:11 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/12 16:45:10 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/03/24 20:49:30 by martim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	save_wall_text(t_game *game, char *wall, t_token type)
 		return (print_error(TEXT_EXT), free(text), 0);
 	if (access(text, O_RDONLY))
 		return (print_error(MISS_TEXT), free(text), 0);
-	if (type == NO && !game->config.no_text)
-		return (game->config.no_text = text, 1);
-	if (type == SO && !game->config.so_text)
-		return (game->config.so_text = text, 1);
-	if (type == WE && !game->config.we_text)
-		return (game->config.we_text = text, 1);
-	if (type == EA && !game->config.ea_text)
-		return (game->config.ea_text = text, 1);
+	if (type == NO && !game->texture.path[NO])
+		return (game->texture.path[NO] = text, 1);
+	if (type == SO && !game->texture.path[SO])
+		return (game->texture.path[SO] = text, 1);
+	if (type == WE && !game->texture.path[WE])
+		return (game->texture.path[WE] = text, 1);
+	if (type == EA && !game->texture.path[EA])
+		return (game->texture.path[EA] = text, 1);
 	return (print_error(DBL_TEXT), free(text), 0);
 }
 
@@ -55,10 +55,10 @@ int	save_color(t_game *game, char *color, t_token type)
 	b = parse_color_code(color, &i);
 	if (r == -1 || g == -1 || b == -1)
 		return (print_error(RGB_ERR), 0);
-	if (type == F && game->config.floor_color == -1)
-		return (game->config.floor_color = ((r << 16) | (g << 8) | b), 1);
-	if (type == C && game->config.ceiling_color == -1)
-		return (game->config.ceiling_color = ((r << 16) | (g << 8) | b), 1);
+	if (type == F && game->texture.floor_color == -1)
+		return (game->texture.floor_color = ((r << 16) | (g << 8) | b), 1);
+	if (type == C && game->texture.ceiling_color == -1)
+		return (game->texture.ceiling_color = ((r << 16) | (g << 8) | b), 1);
 	return (print_error(DBL_COLOR), 0);
 }
 
