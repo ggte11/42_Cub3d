@@ -21,3 +21,15 @@ void	clean_map(char **map)
 	free(map);
 	map = NULL;
 }
+
+void	clear_image(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < SWIDTH * SHEIGHT * (game->image.bpp / 8))
+	{
+		game->image.data[i] = 0;
+		i++;
+	}
+}

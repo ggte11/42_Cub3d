@@ -111,8 +111,8 @@ typedef struct s_image
 // sprite struct
 typedef struct s_tex
 {
-	char	*path[4];
-	t_image	img[4];
+	char	*path[DIR_COUNT];
+	t_image	img[DIR_COUNT];
 	int		floor_color;
 	int		ceiling_color;
 }			t_tex;
@@ -170,13 +170,12 @@ void	init_game(t_game *game);
 void	init_player(t_game *game);
 void	put_pixel(int x, int y, int color, t_game *game);
 int		draw_loop(t_game *game);
-void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
 // free hub
 void	clean_config(t_game *game);
 void	clean_map(char **map);
-
+void	clear_image(t_game *game);
 
 // keys
 int		key_press(int keycode, t_player *player);
@@ -189,6 +188,9 @@ void	move_player(t_game *game);
 void	draw_square(int x, int y, int size, int color ,t_game *game);
 bool	can_move_to(t_game *game, float x, float y, float r);
 float	get_spawn_angle(char dir);
+
+// Textures
+int	load_textures(t_game *game);
 
 // Draw lines
 void	draw_line(t_player *player, t_game *game, float angle, int x);

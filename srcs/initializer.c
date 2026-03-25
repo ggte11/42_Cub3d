@@ -12,18 +12,6 @@ void	put_pixel(int x, int y, int color, t_game *game)
 	game->image.data[i + 2] = (color >> 16) & 0xFF;
 }
 
-void	clear_image(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (i < SWIDTH * SHEIGHT * (game->image.bpp / 8))
-	{
-		game->image.data[i] = 0;
-		i++;
-	}
-}
-
 void	draw_map(t_game *game)
 {
 	char	**map;
@@ -74,7 +62,9 @@ void	init_game(t_game *game)
 	init_player(game);
 	init_minimap(game);
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3d");
+	if (!game->mlx || !load_textures(game))
+		exit(1);
+	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3D");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
 	game->image.data = mlx_get_data_addr(game->image.img, &game->image.bpp,
 		&game->image.size_line, &game->image.endian);
