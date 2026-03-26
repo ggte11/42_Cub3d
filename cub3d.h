@@ -192,6 +192,9 @@ float	get_spawn_angle(char dir);
 // Textures
 int	load_textures(t_game *game);
 
+// Draw
+void	draw_tex_colum(t_game *game, int x, int start, int end);
+
 // Draw lines
 void	draw_line(t_player *player, t_game *game, float angle, int x);
 

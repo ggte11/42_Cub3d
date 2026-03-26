@@ -7,7 +7,7 @@ static int	get_wall_height(float dist)
 	return ((int)(SHEIGHT / dist));
 }
 
-static void	draw_vertical(t_game *game, int x, int start, int end, int color)
+/* static void	draw_vertical(t_game *game, int x, int start, int end, int color)
 {
 	int	y;
 
@@ -21,7 +21,7 @@ static void	draw_vertical(t_game *game, int x, int start, int end, int color)
 		put_pixel(x, y, color, game);
 		y++;
 	}
-}
+} */
 
 void	draw_line(t_player *player, t_game *game, float angle, int x)
 {
@@ -32,7 +32,6 @@ void	draw_line(t_player *player, t_game *game, float angle, int x)
 	int		height;
 	int		start;
 	int		end;
-	int		color;
 
 	dist = cast_ray_dda(game, angle, &side);
 	angle_diff = angle - player->angle;
@@ -44,8 +43,5 @@ void	draw_line(t_player *player, t_game *game, float angle, int x)
 	height = get_wall_height(corr_dist);
 	start = (SHEIGHT - height) / 2;
 	end = (SHEIGHT + height) / 2;
-	color = 0x0000FF;
-	if (side == 1)
-		color = 0x000099;
-	draw_vertical(game, x, start, end, color);
+	draw_tex_colum(game, x, start, end);
 }

@@ -28,6 +28,7 @@ SRCS		  = cub3d.c \
 			  srcs/minimap.c \
 			  srcs/wall_col.c \
 			  srcs/draw_lines.c \
+			  srcs/draw.c \
 			  srcs/raycast.c
 
 OBJS        = $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
