@@ -21,14 +21,14 @@ static int	get_tex_idx(t_game *game, int side)
 	if (side == 0)
 	{
 		if (game->ray.dir_x > 0)
-			return (WE);
-		return (EA);
+			return (EA);
+		return (WE);
 	}
 	else
 	{
 		if (game->ray.dir_y > 0)
-			return (NO);
-		return (SO);
+			return (SO);
+		return (NO);
 	}
 }
 
@@ -43,9 +43,9 @@ static int	get_tex_x(t_game *game, float dist, int side, int tex_idx)
 		wall_x = (game->player.x / BLOCK) + dist * game->ray.dir_x;
 	wall_x -= floor(wall_x);
 	tex_x = (int)(wall_x * game->texture.img[tex_idx].width);
-	if (side == 0 && game->ray.dir_x > 0)
+	if (side == 0 && game->ray.dir_x < 0)
 		tex_x = game->texture.img[tex_idx].width - tex_x - 1;
-	if (side == 1 && game->ray.dir_y < 0)
+	if (side == 1 && game->ray.dir_y > 0)
 		tex_x = game->texture.img[tex_idx].width - tex_x - 1;
 	return (tex_x);
 }
@@ -63,9 +63,10 @@ void	draw_tex_colum(t_game *game, int x, int start, int end)
 	int		tex_y;
 
 	side = game->ray.side;
-	dist = game->ray.side_dist_x;
+	if (side == 0)
+		dist = game->ray.side_dist_x - game->ray.delta_x;
 	if (side == 1)
-		dist = game->ray.side_dist_y;
+		dist = game->ray.side_dist_y - game->ray.delta_y;
 	tex_idx = get_tex_idx(game, side);
 	height = end - start + 1;
 	tex_x = get_tex_x(game, dist, side, tex_idx);

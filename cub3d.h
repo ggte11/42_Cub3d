@@ -168,7 +168,6 @@ typedef struct s_game
 // initializer
 void	init_game(t_game *game);
 void	init_player(t_game *game);
-void	put_pixel(int x, int y, int color, t_game *game);
 int		draw_loop(t_game *game);
 void	draw_map(t_game *game);
 
@@ -176,10 +175,11 @@ void	draw_map(t_game *game);
 void	clean_config(t_game *game);
 void	clean_map(char **map);
 void	clear_image(t_game *game);
+int		on_destroy(t_game *game);
 
 // keys
-int		key_press(int keycode, t_player *player);
-int		key_realease(int keycode, t_player *player);
+int		key_press(int keycode, t_game *game);
+int		key_realease(int keycode, t_game *game);
 
 // player
 void	move_player(t_game *game);
@@ -197,6 +197,8 @@ void	draw_tex_colum(t_game *game, int x, int start, int end);
 
 // Draw lines
 void	draw_line(t_player *player, t_game *game, float angle, int x);
+void	put_pixel(int x, int y, int color, t_game *game);
+void	draw_background(t_game *game);
 
 // Parsing
 void	print_error(char *msg);

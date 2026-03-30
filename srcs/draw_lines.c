@@ -7,21 +7,45 @@ static int	get_wall_height(float dist)
 	return ((int)(SHEIGHT / dist));
 }
 
-/* static void	draw_vertical(t_game *game, int x, int start, int end, int color)
+void	put_pixel(int x, int y, int color, t_game *game)
 {
+	int	i;
+
+	if (x >= SWIDTH || y >= SHEIGHT || x < 0 || y < 0)
+		return ;
+	i = y * game->image.size_line + x * game->image.bpp / 8;
+	game->image.data[i] = color & 0xFF;
+	game->image.data[i + 1] = (color >> 8) & 0xFF;
+	game->image.data[i + 2] = (color >> 16) & 0xFF;
+}
+
+void	draw_background(t_game *game)
+{
+	int	x;
 	int	y;
 
-	if (start < 0)
-		start = 0;
-	if (end >= SHEIGHT)
-		end = SHEIGHT - 1;
-	y = start;
-	while (y <= end)
+	y = 0;
+	while (y < SHEIGHT / 2)
 	{
-		put_pixel(x, y, color, game);
+		x = 0;
+		while (x < SWIDTH)
+		{
+			put_pixel(x, y, game->texture.ceiling_color, game);
+			x++;
+		}
 		y++;
 	}
-} */
+	while (y < SHEIGHT)
+	{
+		x = 0;
+		while (x < SWIDTH)
+		{
+			put_pixel(x, y, game->texture.floor_color, game);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	draw_line(t_player *player, t_game *game, float angle, int x)
 {

@@ -1,17 +1,5 @@
 #include "../cub3d.h"
 
-void	put_pixel(int x, int y, int color, t_game *game)
-{
-	int	i;
-
-	if (x >= SWIDTH || y >= SHEIGHT || x < 0 || y < 0)
-		return ;
-	i = y * game->image.size_line + x * game->image.bpp / 8;
-	game->image.data[i] = color & 0xFF;
-	game->image.data[i + 1] = (color >> 8) & 0xFF;
-	game->image.data[i + 2] = (color >> 16) & 0xFF;
-}
-
 void	draw_map(t_game *game)
 {
 	char	**map;
@@ -42,7 +30,7 @@ int	draw_loop(t_game *game)
 	int		i;
 
 	move_player(game);
-	clear_image(game);
+	draw_background(game);
 	fraction = PI / 3 / SWIDTH;
 	start_x = game->player.angle - PI / 6;
 	i = 0;

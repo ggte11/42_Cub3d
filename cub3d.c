@@ -24,14 +24,6 @@ int validate_config(t_game *game)
 	return (1);
 }
 
-int	on_destroy(t_game *game)
-{
-	clean_map(game->map.grid);
-	clean_config(game);
-	exit(0);
-	return (0);
-}
-
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -53,5 +45,5 @@ int	main(int ac, char **av)
 	mlx_loop(game.mlx);
 	clean_map(game.map.grid);
 	clean_config(&game);
-	return 0;
+	return (0);
 }

@@ -33,3 +33,11 @@ void	clear_image(t_game *game)
 		i++;
 	}
 }
+
+int	on_destroy(t_game *game)
+{
+	clean_map(game->map.grid);
+	clean_config(game);
+	exit(0);
+	return (0);
+}
