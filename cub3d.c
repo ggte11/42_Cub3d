@@ -38,8 +38,8 @@ int	main(int ac, char **av)
 	if (!validate_config(&game) || !validate_map(&game.map))
 		return (clean_map(game.map.grid), clean_config(&game), 1);
 	init_game(&game);
-	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
-	mlx_hook(game.win, 3, 1L << 1, key_realease, &game.player);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, key_realease, &game);
 	mlx_hook(game.win, 17, 1L << 17, (int (*)())on_destroy, &game);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
