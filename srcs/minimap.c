@@ -22,7 +22,7 @@ void	draw_tile(t_game *game, int x, int y, int color)
 		j = 0;
 		while (j < game->mm.t_size)
 		{
-			px =  game->mm.x + (x * game->mm.t_size) + i;
+			px = game->mm.x + (x * game->mm.t_size) + i;
 			py = game->mm.y + (y * game->mm.t_size) + j;
 			put_pixel(px, py, color, game);
 			j++;

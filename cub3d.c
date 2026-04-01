@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int check_config(t_game *game)
+int	check_config(t_game *game)
 {
 	if (!game->texture.path[NO])
 		return (0);
@@ -17,7 +17,7 @@ int check_config(t_game *game)
 	return (1);
 }
 
-int validate_config(t_game *game)
+int	validate_config(t_game *game)
 {
 	if (!check_config(game))
 		return (print_error(FORM_ERR), 0);

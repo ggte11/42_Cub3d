@@ -51,13 +51,13 @@ static void	init_step_side(t_rays *ray, float pos_x, float pos_y, int map[2])
 	}
 }
 
-static void	run_dda(t_game *game, t_rays *ray ,int map[2])
+static void	run_dda(t_game *game, t_rays *ray, int map[2])
 {
 	while (1)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->side_dist_x +=ray->delta_x;
+			ray->side_dist_x += ray->delta_x;
 			map[0] += ray->step_x;
 			ray->side = 0;
 		}

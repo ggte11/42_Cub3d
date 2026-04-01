@@ -185,12 +185,12 @@ int		key_realease(int keycode, t_game *game);
 void	move_player(t_game *game);
 
 // player utils
-void	draw_square(int x, int y, int size, int color ,t_game *game);
+void	draw_square(int x, int y, int size, int color, t_game *game);
 bool	can_move_to(t_game *game, float x, float y, float r);
 float	get_spawn_angle(char dir);
 
 // Textures
-int	load_textures(t_game *game);
+int		load_textures(t_game *game);
 
 // Draw
 void	draw_tex_colum(t_game *game, int x, int start, int end);

@@ -10,7 +10,7 @@ void	clean_config(t_game *game)
 
 void	clean_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map && map[i])

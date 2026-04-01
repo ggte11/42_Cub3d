@@ -55,7 +55,7 @@ void	init_game(t_game *game)
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3D");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
 	game->image.data = mlx_get_data_addr(game->image.img, &game->image.bpp,
-		&game->image.size_line, &game->image.endian);
+			&game->image.size_line, &game->image.endian);
 	mlx_put_image_to_window(game->mlx, game->win, game->image.img, 0, 0);
 }
 

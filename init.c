@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void init_config(t_game *game)
+void	init_config(t_game *game)
 {
 	game->texture.path[NO] = NULL;
 	game->texture.path[SO] = NULL;
@@ -10,7 +10,7 @@ void init_config(t_game *game)
 	game->texture.ceiling_color = -1;
 }
 
-void init_map(t_game *game)
+void	init_map(t_game *game)
 {
 	game->map.grid = NULL;
 	game->map.m_width = 0;

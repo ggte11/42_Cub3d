@@ -83,7 +83,7 @@ void	draw_tex_colum(t_game *game, int x, int start, int end)
 	while (y <= end)
 	{
 		tex_y = (int)tex_pos;
-		put_pixel(x, y, get_tex_color(&game->texture.img[tex_idx],tex_x, tex_y), game);
+		put_pixel(x, y, get_tex_color(&game->texture.img[tex_idx], tex_x, tex_y), game);
 		tex_pos += step;
 		y++;
 	}

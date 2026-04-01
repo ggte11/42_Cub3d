@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-void	draw_square(int x, int y, int size, int color ,t_game *game)
+void	draw_square(int x, int y, int size, int color, t_game *game)
 {
 	int	i;
 	int	j;
@@ -20,10 +20,10 @@ void	draw_square(int x, int y, int size, int color ,t_game *game)
 
 bool	can_move_to(t_game *game, float x, float y, float r)
 {
-	return (!touch_wall(x - r, y - r, game)
-			&& !touch_wall(x + r, y - r, game)
-			&& !touch_wall(x - r, y + r, game)
-			&& !touch_wall(x + r, y + r, game));
+	return (!touch_wall(x - r, y - r, game) \
+&& !touch_wall(x + r, y - r, game) \
+&& !touch_wall(x - r, y + r, game) \
+&& !touch_wall(x + r, y + r, game));
 }
 
 float	get_spawn_angle(char dir)
