@@ -31,7 +31,7 @@ void	draw_tile(t_game *game, int x, int y, int color)
 	}
 }
 
-static void	draw_player_minimap(t_game *game)
+static void	draw_player_minimap(t_game *g)
 {
 	int	size;
 	int	px;
@@ -39,12 +39,11 @@ static void	draw_player_minimap(t_game *game)
 	int	i;
 	int	j;
 
-	size = game->mm.t_size;
-	px = MINIMAP_X + (int)(game->player.x / BLOCK * size);
-	py = MINIMAP_Y + (int)(game->player.y / BLOCK * size);
-	if (px < game->mm.x || px > game->mm.x + game->mm.width)
-		return ;
-	if (py < game->mm.y || py > game->mm.y + game->mm.height)
+	size = g->mm.t_size;
+	px = MINIMAP_X + (int)(g->player.x / BLOCK * size);
+	py = MINIMAP_Y + (int)(g->player.y / BLOCK * size);
+	if ((px < g->mm.x || px > g->mm.x + g->mm.width)
+		|| (py < g->mm.y || py > g->mm.y + g->mm.height))
 		return ;
 	i = -2;
 	while (i <= 2)
@@ -52,9 +51,9 @@ static void	draw_player_minimap(t_game *game)
 		j = -2;
 		while (j <= 2)
 		{
-			if (px + i >= game->mm.x && px + i <= game->mm.x + game->mm.width
-				&& py + j >= game->mm.y && py + j <= game->mm.y + game->mm.height)
-					put_pixel(px + i, py + j, 0xFF0000, game);
+			if (px + i >= g->mm.x && px + i <= g->mm.x + g->mm.width
+				&& py + j >= g->mm.y && py + j <= g->mm.y + g->mm.height)
+				put_pixel(px + i, py + j, 0xFF0000, g);
 			j++;
 		}
 		i++;

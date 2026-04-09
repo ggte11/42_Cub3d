@@ -4,22 +4,22 @@ void	draw_map(t_game *game)
 {
 	char	**map;
 	int		color;
-	int		y;
-	int		x;
+	int		pos[2];
 
 	map = game->map.grid;
 	color = 0x0000FF;
-	y = 0;
-	while (map[y])
+	pos[1] = 0;
+	while (map[pos[1]])
 	{
-		x = 0;
-		while (map[y][x])
+		pos[0] = 0;
+		while (map[pos[1]][pos[0]])
 		{
-			if (map[y][x] == '1')
-				draw_square(x * BLOCK, y * BLOCK, BLOCK, color, game);
-			x++;
+			if (map[pos[1]][pos[0]] == '1')
+				draw_square((int [2]){pos[0] * BLOCK, pos[1] * BLOCK},
+					BLOCK, color, game);
+			pos[0]++;
 		}
-		y++;
+		pos[1]++;
 	}
 }
 

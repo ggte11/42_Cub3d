@@ -1,6 +1,6 @@
 #include "../cub3d.h"
 
-void	draw_square(int x, int y, int size, int color, t_game *game)
+void	draw_square(int xy[2], int size, int color, t_game *game)
 {
 	int	i;
 	int	j;
@@ -11,7 +11,7 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 		i = 0;
 		while (i < size)
 		{
-			put_pixel(x + i, y + j, color, game);
+			put_pixel(xy[0] + i, xy[1] + j, color, game);
 			i++;
 		}
 		j++;

@@ -54,8 +54,6 @@ void	draw_line(t_player *player, t_game *game, float angle, int x)
 	float	angle_diff;
 	int		side;
 	int		height;
-	int		start;
-	int		end;
 
 	dist = cast_ray_dda(game, angle, &side);
 	angle_diff = angle - player->angle;
@@ -65,7 +63,6 @@ void	draw_line(t_player *player, t_game *game, float angle, int x)
 		angle_diff += 2 * PI;
 	corr_dist = dist * cos(angle_diff);
 	height = get_wall_height(corr_dist);
-	start = (SHEIGHT - height) / 2;
-	end = (SHEIGHT + height) / 2;
-	draw_tex_colum(game, x, start, end);
+	draw_tex_colum(game, x, (SHEIGHT - height) / 2,
+		(SHEIGHT + height) / 2);
 }
