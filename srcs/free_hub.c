@@ -56,6 +56,8 @@ void	clear_image(t_game *game)
 
 int	on_destroy(t_game *game)
 {
+	clean_map(game->map.grid);
+	clean_config(game);
 	if (game->mlx)
 	{
 		if (game->image.img)
@@ -65,8 +67,6 @@ int	on_destroy(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
-	clean_map(game->map.grid);
-	clean_config(game);
 	exit(0);
 	return (0);
 }
