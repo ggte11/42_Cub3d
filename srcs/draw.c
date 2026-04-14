@@ -50,41 +50,45 @@ static int	get_tex_x(t_game *game, float dist, int side, int tex_idx)
 	return (tex_x);
 }
 
-void	draw_tex_colum(t_game *game, int x, int start, int end)
+static void	draw_colum_util(t_game *game, int x, t_col_draw *d)
 {
-	int		y;
-	int		side;
-	int		tex_idx;
-	int		height;
-	int		tex_x;
-	float	dist;
-	float	step;
-	float	tex_pos;
-	int		tex_y;
+	int	tex_y;
+
+	while (d->y <= d->end)
+	{
+		tex_y = (int)d->tex_pos;
+		put_pixel(x, d->y, get_tex_color(&game->texture.img[d->tex_idx],
+				d->tex_x, tex_y), game);
+		d->tex_pos += d->step;
+		d->y++;
+	}
+}
+
+void	draw_tex_colum(t_game *game, int x, int st, int end)
+{
+	int			side;
+	float		dist;
+	t_col_draw	d;
 
 	side = game->ray.side;
 	if (side == 0)
 		dist = game->ray.side_dist_x - game->ray.delta_x;
-	if (side == 1)
+	else
 		dist = game->ray.side_dist_y - game->ray.delta_y;
-	tex_idx = get_tex_idx(game, side);
-	height = end - start + 1;
-	tex_x = get_tex_x(game, dist, side, tex_idx);
-	step = (float)game->texture.img[tex_idx].height / (float)height;
-	tex_pos = 0.0f;
-	if (start < 0)
+	d.tex_idx = get_tex_idx(game, side);
+	d.tex_x = get_tex_x(game, dist, side, d.tex_idx);
+	d.step = (float)game->texture.img[d.tex_idx].height / (float)(end - st + 1);
+	d.tex_pos = 0.0f;
+	if (st < 0)
 	{
-		tex_pos = -start * step;
-		start = 0;
+		d.tex_pos = -st * d.step;
+		st = 0;
 	}
 	if (end >= SHEIGHT)
 		end = SHEIGHT - 1;
-	y = start;
-	while (y <= end)
-	{
-		tex_y = (int)tex_pos;
-		put_pixel(x, y, get_tex_color(&game->texture.img[tex_idx], tex_x, tex_y), game);
-		tex_pos += step;
-		y++;
-	}
+	if (end >= SHEIGHT)
+		end = SHEIGHT - 1;
+	d.y = st;
+	d.end = end;
+	draw_colum_util(game, x, &d);
 }

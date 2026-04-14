@@ -138,6 +138,17 @@ typedef struct s_key
 	bool	r_arrow;
 }			t_key;
 
+// struct for draw_tex_colum variables
+typedef struct s_col_draw
+{
+	int		y;
+	int		end;
+	int		tex_idx;
+	int		tex_x;
+	float	tex_pos;
+	float	step;
+}			t_col_draw;
+
 // Player struct
 typedef struct s_player
 {

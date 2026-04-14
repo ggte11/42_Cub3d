@@ -87,9 +87,11 @@ float	cast_ray_dda(t_game *game, float angle, int *side)
 	init_step_side(&game->ray, pos_x, pos_y, map);
 	run_dda(game, &game->ray, map);
 	if (game->ray.side == 0)
-		dist = (map[0] - pos_x + (1 - game->ray.step_x) * 0.5f) / game->ray.dir_x;
+		dist = (map[0] - pos_x + (1 - game->ray.step_x)
+				* 0.5f) / game->ray.dir_x;
 	else
-		dist = (map[1] - pos_y + (1 - game->ray.step_y) * 0.5f) / game->ray.dir_y;
+		dist = (map[1] - pos_y + (1 - game->ray.step_y)
+				* 0.5f) / game->ray.dir_y;
 	if (side)
 		*side = game->ray.side;
 	return (dist);
