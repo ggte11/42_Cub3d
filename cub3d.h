@@ -14,6 +14,7 @@
 # include "minilibx-linux/mlx.h"
 # include "minilibx-linux/mlx_int.h"
 # include "libft/libft.h"
+# include "libft/get_next_line/get_next_line.h"
 
 /* ************************************************************************** */
 /*                                   DEFINES                                  */
@@ -39,7 +40,6 @@
 # define ESC 65307
 
 # define PI 3.14159265359
-# include "libft/get_next_line/get_next_line.h"
 
 # define FORM_ERR "Invalid file format"
 # define TEXT_EXT "Invalid texture extension"
