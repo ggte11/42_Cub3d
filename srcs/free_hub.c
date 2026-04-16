@@ -19,11 +19,12 @@ static void	destroy_textures(t_game *game)
 	i = 0;
 	while (i < DIR_COUNT)
 	{
-		if (game->texture.path[i] && game->texture.img[i].img)
+		if (game->mlx && game->texture.img[i].img)
 		{
 			mlx_destroy_image(game->mlx, game->texture.img[i].img);
-			game->texture.img[i].img = NULL;
 		}
+		game->texture.img[i].img = NULL;
+		game->texture.img[i].data = NULL;
 		i++;
 	}
 }

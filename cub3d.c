@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:08:05 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/16 16:08:06 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:29:36 by martim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (print_error("Invalid number of args"), 1);
 	init_config(&game);
-	init_map(&game);
 	if (parse_file(&game, av[1]))
 		return (1);
 	extract_data(&game);

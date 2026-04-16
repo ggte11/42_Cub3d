@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:08:09 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/16 16:41:44 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/16 20:29:11 by martim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +226,6 @@ void	draw_background(t_game *game);
 // Parsing
 void	print_error(char *msg);
 void	init_config(t_game *game);
-void	init_map(t_game *game);
 int		check_ext(char *filename, char *ext);
 int		parse_file(t_game *game, char *filename);
 int		skipwhitespace(char *str, int pos);

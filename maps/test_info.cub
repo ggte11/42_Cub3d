@@ -1,10 +1,10 @@
-NO sprites/North.xpm
-SO sprites/South.xpm
-WE sprites/West.xpm
-EA sprites/East.xpm
+NO sprites/North2.xpm
+SO sprites/South2.xpm
+WE sprites/West2.xpm
+EA sprites/East2.xpm
 
-F 120,100,0
-C 225,30,0
+F 150,150,100
+C 200,150,255
 
         1111111
         1000001
