@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:11 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/24 20:49:30 by martim           ###   ########.fr       */
+/*   Updated: 2026/04/16 19:20:44 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	save_color(t_game *game, char *color, t_token type)
 	r = parse_color_code(color, &i);
 	g = parse_color_code(color, &i);
 	b = parse_color_code(color, &i);
+	if (color[i])
+		return (print_error(RGB_ERR), 0);
 	if (r == -1 || g == -1 || b == -1)
 		return (print_error(RGB_ERR), 0);
 	if (type == F && game->texture.floor_color == -1)
