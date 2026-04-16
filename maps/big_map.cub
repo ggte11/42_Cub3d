@@ -1,10 +1,10 @@
-NO sprites/North1.xpm
+NO 			sprites/North1.xpm
 SO sprites/South1.xpm
-WE sprites/West1.xpm
+WE 			sprites/West1.xpm
 EA sprites/East1.xpm
 
 F 34,139,34
-C 135,206,235
+C 			135,206,235
 
 111111111111111111111111
 1S0000000000000000000001
