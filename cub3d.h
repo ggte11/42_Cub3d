@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/16 16:08:09 by mcardoso          #+#    #+#             */
+/*   Updated: 2026/04/16 16:41:44 by mcardoso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -76,23 +88,23 @@ typedef struct s_map
 	char	**grid;
 	int		m_width;
 	int		m_height;
-	int		player_x;
-	int		player_y;
-	char	player_dir;
+	int		player_x;	//player pos in x
+	int		player_y;	//player pos in y
+	char	player_dir;	//player direction
 }			t_map;
 
 // ray struct
 typedef struct s_rays
 {
-	float	dir_x;
-	float	dir_y;
-	float	delta_x;
-	float	delta_y;
-	float	side_dist_x;
-	float	side_dist_y;
-	int		step_x;
-	int		step_y;
-	int		side;
+	float	dir_x;			//ray direction x
+	float	dir_y;			//ray direction y
+	float	delta_x;		//distance to cross 1 vertical grid line
+	float	delta_y;		//distance to cross 1 horizontal grid line
+	float	side_dist_x;	//distance from ray origin to next grid line x
+	float	side_dist_y;	//distance from ray origin to next grid line y
+	int		step_x;			//grid step on x, left or right
+	int		step_y;			//grid step on x, up or down
+	int		side;			//wich side has hit, vertical or horizontal
 	int		wall_dir;
 }			t_rays;
 

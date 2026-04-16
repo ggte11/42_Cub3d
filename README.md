@@ -103,4 +103,4 @@ make re       # Full rebuild
 AI (Claude) was used during this project for the following tasks:
 
 - **Debugging**: helping identify off-by-one errors in map parsing and boundary checks, and diagnosing texture coordinate calculation issues.
-- **Code review**: reviewing wall collision logic and ray-casting math for correctness.
+- **Code review**: reviewing wall collision logic, ray-casting math for correctness, and vector logic for player movement.
