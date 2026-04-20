@@ -6,7 +6,7 @@
 /*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:11 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/04/16 19:20:44 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/04/20 13:53:53 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,4 @@ void	extract_data(t_game *game)
 	game->map.m_width = ft_strlen(line);
 	line[line_len - 1] = '\n';
 	extract_map(game, line);
-	close(game->fd);
 }

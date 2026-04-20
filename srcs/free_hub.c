@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_hub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:07:43 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/16 16:07:44 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/20 13:54:25 by ddamiba          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	clean_config(t_game *game)
 	game->texture.path[SO] = NULL;
 	game->texture.path[WE] = NULL;
 	game->texture.path[EA] = NULL;
+	if (game->fd != -1)
+		close(game->fd);
 }
 
 void	clean_map(char **map)
