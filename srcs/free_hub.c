@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_hub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:07:43 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/20 13:54:25 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/04/20 17:33:01 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	clear_image(t_game *game)
 	}
 }
 
-int	on_destroy(t_game *game)
+void	on_destroy(t_game *game)
 {
 	clean_map(game->map.grid);
 	clean_config(game);
@@ -83,5 +83,4 @@ int	on_destroy(t_game *game)
 		free(game->mlx);
 	}
 	exit(0);
-	return (0);
 }

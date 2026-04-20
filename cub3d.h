@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:08:09 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/16 20:29:11 by martim           ###   ########.fr       */
+/*   Updated: 2026/04/20 17:33:34 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ void	draw_map(t_game *game);
 void	clean_config(t_game *game);
 void	clean_map(char **map);
 void	clear_image(t_game *game);
-int		on_destroy(t_game *game);
+void		on_destroy(t_game *game);
 
 // keys
 int		key_press(int keycode, t_game *game);
