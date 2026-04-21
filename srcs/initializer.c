@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:07:45 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/20 17:31:24 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/21 18:50:44 by martim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_game(t_game *game)
 	init_minimap(game);
 	game->mlx = mlx_init();
 	if (!game->mlx || !load_textures(game))
-		return (on_destroy(game));
+		on_destroy(game);
 	game->win = mlx_new_window(game->mlx, SWIDTH, SHEIGHT, "cub3D");
 	game->image.img = mlx_new_image(game->mlx, SWIDTH, SHEIGHT);
 	game->image.data = mlx_get_data_addr(game->image.img, &game->image.bpp,
