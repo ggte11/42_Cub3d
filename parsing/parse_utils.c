@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddamiba <ddamiba@student.42.fr>            +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/11 16:36:42 by ddamiba           #+#    #+#             */
-/*   Updated: 2026/03/12 16:43:24 by ddamiba          ###   ########.fr       */
+/*   Updated: 2026/04/22 22:25:29 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int	parse_color_code(char *color, int *i)
 		delta_i++;
 	}
 	if ((delta_i == 0 || delta_i > 3) || value > 255)
+		return (-1);
+	if (color[*i] == ',' && !color[*i + 1])
 		return (-1);
 	(*i)++;
 	return (value);
