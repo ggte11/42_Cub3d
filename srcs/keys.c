@@ -6,7 +6,7 @@
 /*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:07:48 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/20 17:34:52 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/23 15:26:40 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_press(int keycode, t_game *game)
 {
 	if (keycode == ESC)
-		return(on_destroy(game), 1);
+		return (on_destroy(game), 1);
 	if (keycode == W)
 		game->player.key.w = true;
 	if (keycode == S)

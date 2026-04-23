@@ -1,6 +1,6 @@
 NAME        = cub3D
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g -O3 -march=native -flto -ftree-vectorize -funroll-loops -ffast-math
 OBJ_DIR     = obj
 MLX_DIR     = minilibx-linux
 LIBFT_DIR   = libft

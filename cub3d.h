@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martim <martim@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:08:09 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/21 18:49:42 by martim           ###   ########.fr       */
+/*   Updated: 2026/04/23 15:55:17 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@
 /* ************************************************************************** */
 
 # define SWIDTH 1280		// Screen width
-# define SHEIGHT 720		// Screen height
+# define SHEIGHT 960		// Screen height
 # define BLOCK 64			// Block size of player
 # define TILE 24			// Tile size minimap (24x24)
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_X 10
 # define MINIMAP_Y 10
-# define MOVE_SPEED 2.2f	// Player movement speed
-# define ROT_SPEED 0.06f	// Player rotation speed
+# define MOVE_SPEED 0.6f	// Player movement speed
+# define ROT_SPEED 0.02f	// Player rotation speed
 
 # define W 119				// W key
 # define S 115				// S key
