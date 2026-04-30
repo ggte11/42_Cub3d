@@ -6,7 +6,7 @@
 /*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:07:40 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/16 16:07:41 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:47:04 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	draw_tex_colum(t_game *game, int x, int st, int end)
 		d.tex_pos = -st * d.step;
 		st = 0;
 	}
-	if (end >= SHEIGHT)
-		end = SHEIGHT - 1;
 	if (end >= SHEIGHT)
 		end = SHEIGHT - 1;
 	d.y = st;

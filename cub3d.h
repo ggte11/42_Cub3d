@@ -6,7 +6,7 @@
 /*   By: mcardoso <mcardoso@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 16:08:09 by mcardoso          #+#    #+#             */
-/*   Updated: 2026/04/23 15:55:17 by mcardoso         ###   ########.fr       */
+/*   Updated: 2026/04/30 15:51:33 by mcardoso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define MINIMAP_SCALE 0.5
 # define MINIMAP_X 10
 # define MINIMAP_Y 10
-# define MOVE_SPEED 0.6f	// Player movement speed
-# define ROT_SPEED 0.02f	// Player rotation speed
+# define MOVE_SPEED 1.0f	// Player movement speed
+# define ROT_SPEED 0.04f	// Player rotation speed
 
 # define W 119				// W key
 # define S 115				// S key
